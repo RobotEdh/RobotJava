@@ -6,10 +6,10 @@ import javax.swing.JPanel;
 
 class FramePicture extends JFrame
 {
-	FramePicture() {
+	FramePicture(String filename) {
 		setTitle ("PICTURE") ;
 		setSize (800, 500) ;
-		panpic = new PanelPicture() ;
+		panpic = new PanelPicture(filename) ;
 		getContentPane().add(panpic) ;
 	}
 	private JPanel panpic ;
@@ -19,9 +19,9 @@ public class PanelPicture extends JPanel{
 	
 	 private Image photo = null;
 	
-	public PanelPicture(){
-		photo = getToolkit().getImage("c:/photo.jpg") ;
-	    System.out.println("c:/photo.jpg");
+	public PanelPicture(String filename){
+		photo = getToolkit().getImage(filename) ;
+	    System.out.println(filename);
     }
     public void paintComponent(Graphics g){
     	super.paintComponent(g) ;

@@ -9,6 +9,11 @@ import javax.swing.JPanel;
 
 public class ActionTakePicture extends AbstractAction {
 	private RobotWindow window;
+	private int cmd[] =  {XbeeSend.CMD_PICTURE};
+	
+	private String filename = "PICT";
+	private int pictno = 0;
+	
 
 	
 	public ActionTakePicture(RobotWindow window, String texte){
@@ -20,7 +25,26 @@ public class ActionTakePicture extends AbstractAction {
 	public void actionPerformed(ActionEvent e) { 
 	    System.out.println("Take Picture");
 	    
-	    FramePicture windowPicture = new FramePicture() ;
+	    try {
+	    	XbeeSend a = new XbeeSend(cmd);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	    
+    
+	    pictno++;
+	    filename = filename + pictno + ".jpg";
+	    System.out.println("filename");
+	    	
+	    try {
+			XbeeReceiveFile b = new XbeeReceiveFile(filename);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	    
+	    FramePicture windowPicture = new FramePicture(filename) ;
 	    windowPicture.setVisible(true) ;
 
 		
