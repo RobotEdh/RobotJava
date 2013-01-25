@@ -17,8 +17,10 @@ public class XbeeSend {
 	
 	private final static Logger log = Logger.getLogger(XbeeSend.class);
 	
-	public static final int CMD_STOP = 0x01;
-	public static final int CMD_PICTURE = 0x02;
+	public static final int CMD_START = 0x01;
+	public static final int CMD_STOP = 0x02;
+	public static final int CMD_INFOS = 0x03;
+	public static final int CMD_PICTURE = 0x04;
 	
 	public XbeeSend(int cmd[]) throws Exception {
 		

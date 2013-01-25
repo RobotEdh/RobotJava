@@ -15,8 +15,18 @@ import javax.swing.JTextField;
 public class RobotWindow extends JFrame{
 	private JTextField field1;
 	private JTextField field2;
-	private JLabel label;
-	private JComboBox liste;
+	private JLabel labelSpeedMotorRight;
+	private int SpeedMotorRight = 0;
+	private JLabel labelSpeedMotorLeft;
+	private int SpeedMotorLeft = 0;
+	private JLabel labelTickRight;
+	private int TickRight = 0;
+	private JLabel labelTickLeft;
+	private int TickLeft = 0;
+	private JLabel labeldirection;
+	private int direction = 0;
+	private JLabel labeldistance;
+	private int distance = 0;
 	
 	public RobotWindow(){
 		super();
@@ -49,17 +59,33 @@ public class RobotWindow extends JFrame{
 		
 		panel.add(field2);
 
-		JButton boutonTakePicture = new JButton(new ActionTakePicture(this, "Take picture"));
-		JButton boutonGo = new JButton(new ActionGo(this, "Go"));
+		JButton boutonStart = new JButton(new ActionStart(this, "Start"));
 		JButton boutonStop = new JButton(new ActionStop(this, "Stop"));
-		
-		panel.add(boutonTakePicture);
-		panel.add(boutonGo);
+		JButton boutonInfos = new JButton(new ActionInfos(this, "Get infos"));
+		JButton boutonTakePicture = new JButton(new ActionTakePicture(this, "Take picture"));
+
+
+		panel.add(boutonStart);
 		panel.add(boutonStop);
+		panel.add(boutonInfos);
+		panel.add(boutonTakePicture);
 		
-		label = new JLabel("Résultat : Pas encore calculé");
+		labelSpeedMotorRight = new JLabel("SpeedMotorRight: " + SpeedMotorRight);
+		labelSpeedMotorLeft  = new JLabel("labelSpeedMotorLeft: " + labelSpeedMotorLeft);
+		labelTickRight  = new JLabel("labelTickRight: " + labelTickRight);
+		labelTickLeft  = new JLabel("labelTickLeft: " + labelTickLeft);
+		labeldirection  = new JLabel("labeldirection: " + labeldirection);
+		labeldistance  = new JLabel("labeldistance: " + labeldistance);
 		
-		panel.add(label);
+		panel.add(labelSpeedMotorRight);
+		panel.add(labelSpeedMotorLeft);
+		panel.add(labelTickRight);
+		panel.add(labelTickLeft);
+		panel.add(labeldirection);
+		panel.add(labeldistance);
+		
+
+		labelSpeedMotorRight.setText("SpeedMotorRight: " + SpeedMotorRight);
 		
 		return panel;
 	}

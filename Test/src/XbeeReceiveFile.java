@@ -39,13 +39,9 @@ public class XbeeReceiveFile {
 
 	private final static Logger log = Logger.getLogger(XbeeReceiveFile.class);
 
-	private int[] rep;
-	String UTF_8 = "UTF-8";//8bits
-	@SuppressWarnings("finally")
 	public XbeeReceiveFile(String filename) throws Exception {
 	
-	log.info("start ApiReceiverTest");
-	log.info("open:" + filename);
+	log.info("start XbeeReceiveFile, open:" + filename);
 		  
 	OutputStream out = null;
 	out = new BufferedOutputStream(new FileOutputStream(filename));
