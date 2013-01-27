@@ -11,7 +11,7 @@ public class ActionTakePicture extends AbstractAction {
 	private RobotWindow window;
 	private int cmd[] =  {XbeeSend.CMD_PICTURE};
 	
-	private String filename = "PICT";
+	private String filename;
 	private int pictno = 0;
 	
 
@@ -34,8 +34,8 @@ public class ActionTakePicture extends AbstractAction {
 	    
     
 	    pictno++;
-	    filename = filename + pictno + ".jpg";
-	    System.out.println("filename");
+	    filename = "PICT" + pictno + ".jpg";
+	    System.out.println(filename);
 	    	
 	    try {
 			XbeeReceiveFile b = new XbeeReceiveFile(filename);
