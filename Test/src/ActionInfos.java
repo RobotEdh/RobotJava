@@ -8,6 +8,7 @@ public class ActionInfos extends AbstractAction {
 	
 	private RobotWindow window;
 	private int cmd[] =  {XbeeSend.CMD_INFOS};
+	private int Function;
 	private int SpeedMotorRight;
 	private int SpeedMotorLeft;
 	private int TickRight;
@@ -33,6 +34,7 @@ public class ActionInfos extends AbstractAction {
 	    
 		 try {
 			XbeeReceiveInfos b = new XbeeReceiveInfos (
+					 Function,
 					 SpeedMotorRight,
 					 SpeedMotorLeft,
 					 TickRight,

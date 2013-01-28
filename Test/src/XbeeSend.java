@@ -16,6 +16,7 @@ import com.rapplogic.xbee.api.wpan.TxStatusResponse;
 public class XbeeSend {
 	
 	private final static Logger log = Logger.getLogger(XbeeSend.class);
+
 	
 	public static final int CMD_START = 0x01;
 	public static final int CMD_STOP = 0x02;
@@ -38,8 +39,9 @@ public class XbeeSend {
 		int purgeErrors = 0;
 		
 		try {
-			    
+			    System.out.println("XbeeSend3");
 			    xbee.open("COM14", 9600);
+			    System.out.println("XbeeSend4");
 			    XBeeAddress64 destination = new XBeeAddress64(0, 0x13, 0xa2, 0, 0x40, 0x7b, 0xea, 0x23);
 			    int frameId = 0x12;
 			    

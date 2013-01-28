@@ -42,6 +42,7 @@ public class XbeeReceiveInfos {
 	public static final int RESP_INFOS = 0x01;
 
 	public XbeeReceiveInfos(
+			int Function,
 			int SpeedMotorRight,
 			int SpeedMotorLeft,
 			int TickRight,
@@ -83,24 +84,27 @@ public class XbeeReceiveInfos {
  						}
  						else
  						{	
- 							// byte 1: SpeedMotorRight
- 							log.info("::" + ((RxResponse64) response).getData()[1]);
- 							SpeedMotorRight = ((RxResponse64) response).getData()[1];
- 							// byte 2: SpeedMotorLeft
- 							log.info("::" + ((RxResponse64) response).getData()[2]);
- 							SpeedMotorLeft = ((RxResponse64) response).getData()[2];							
- 							// byte 3: TickRight
- 							log.info("::" + ((RxResponse64) response).getData()[3]);
- 							TickRight = ((RxResponse64) response).getData()[3];	
- 							// byte 4: TickLeft
- 							log.info("::" + ((RxResponse64) response).getData()[4]);
- 							TickLeft = ((RxResponse64) response).getData()[4];	
+ 							// byte 1: Function
+ 							log.info("Function:" + ((RxResponse64) response).getData()[1]);
+ 							Function = ((RxResponse64) response).getData()[1];
+ 							// byte 2: SpeedMotorRight
+ 							log.info("SpeedMotorRight:" + ((RxResponse64) response).getData()[2]);
+ 							SpeedMotorRight = ((RxResponse64) response).getData()[2];
+ 							// byte 3: SpeedMotorLeft
+ 							log.info("SpeedMotorLeft:" + ((RxResponse64) response).getData()[3]);
+ 							SpeedMotorLeft = ((RxResponse64) response).getData()[3];							
+ 							// byte 4: TickRight
+ 							log.info("TickRight:" + ((RxResponse64) response).getData()[4]);
+ 							TickRight = ((RxResponse64) response).getData()[4];	
  							// byte 5: TickLeft
- 							log.info("::" + ((RxResponse64) response).getData()[5]);
- 							direction = ((RxResponse64) response).getData()[5];
- 							// byte 6: TickLeft
- 							log.info("::" + ((RxResponse64) response).getData()[6]);
- 							distance = ((RxResponse64) response).getData()[6];
+ 							log.info("TickLeft:" + ((RxResponse64) response).getData()[5]);
+ 							TickLeft = ((RxResponse64) response).getData()[5];	
+ 							// byte 6: Direction
+ 							log.info("Direction:" + ((RxResponse64) response).getData()[6]);
+ 							direction = ((RxResponse64) response).getData()[6];
+ 							// byte 7: Distance
+ 							log.info("Distance:" + ((RxResponse64) response).getData()[7]);
+ 							distance = ((RxResponse64) response).getData()[7];
  						}
 					} else {
 						log.info("Ignoring mystery packet " + response.toString());
