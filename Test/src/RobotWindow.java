@@ -56,8 +56,7 @@ public class RobotWindow extends JFrame{
 			
 		JButton boutonStart = new JButton(new ActionStart(this, "Start"));
 		JButton boutonStop = new JButton(new ActionStop(this, "Stop"));
-		//JButton boutonInfos = new JButton(new ActionInfos(this, "Get infos"));
-		JButton boutonInfos = new JButton("Get infos");
+		JButton boutonInfos = new JButton(new ActionInfos(this, "Get infos"));
 		JButton boutonTakePicture = new JButton(new ActionTakePicture(this, "Take picture"));
 
 		
