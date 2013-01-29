@@ -5,9 +5,15 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JPanel;
 
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 
 
 public class ActionTakePicture extends AbstractAction {
+	
+	private final static Logger log = Logger.getLogger(ActionTakePicture.class);
+	
 	private RobotWindow window;
 	private int cmd[] =  {XbeeSend.CMD_PICTURE};
 	
@@ -23,7 +29,10 @@ public class ActionTakePicture extends AbstractAction {
 	}
 	
 	public void actionPerformed(ActionEvent e) { 
-	    System.out.println("Take Picture");
+		
+		log.addAppender(new ConsoleAppender(new PatternLayout("%-6r [%p] %c - %m%n")));
+		
+		log.debug("Start");
 	    
 	    try {
 	    	XbeeSend a = new XbeeSend(cmd);

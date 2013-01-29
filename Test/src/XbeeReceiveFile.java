@@ -17,7 +17,9 @@
  * along with XBee-API.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
@@ -40,7 +42,11 @@ public class XbeeReceiveFile {
 	private final static Logger log = Logger.getLogger(XbeeReceiveFile.class);
 
 	public XbeeReceiveFile(String filename) throws Exception {
-	
+		
+    log.addAppender(new ConsoleAppender(new PatternLayout("%-6r [%p] %c - %m%n")));
+    
+    log.debug("Start");
+		 
 	log.info("start XbeeReceiveFile, open:" + filename);
 		  
 	OutputStream out = null;

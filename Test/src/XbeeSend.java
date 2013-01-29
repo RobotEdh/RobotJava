@@ -1,4 +1,6 @@
+import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 
 import com.rapplogic.xbee.api.ApiId;
 import com.rapplogic.xbee.api.XBee;
@@ -25,9 +27,11 @@ public class XbeeSend {
 	
 	public XbeeSend(int cmd[]) throws Exception {
 		
-	    System.out.println("XbeeSend");
-	    System.out.println(cmd.length);
-	    System.out.println(cmd[0]);
+	    log.addAppender(new ConsoleAppender(new PatternLayout("%-6r [%p] %c - %m%n")));
+		
+	    log.debug("Start");
+	    log.debug("length:" + cmd.length);
+	    log.debug("cmd[0]:" + cmd[0]);
 
 	    XBee xbee = new XBee();
 
@@ -39,9 +43,9 @@ public class XbeeSend {
 		int purgeErrors = 0;
 		
 		try {
-			    System.out.println("XbeeSend3");
+
 			    xbee.open("COM14", 9600);
-			    System.out.println("XbeeSend4");
+
 			    XBeeAddress64 destination = new XBeeAddress64(0, 0x13, 0xa2, 0, 0x40, 0x7b, 0xea, 0x23);
 			    int frameId = 0x12;
 			    

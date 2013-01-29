@@ -17,7 +17,9 @@
  * along with XBee-API.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
@@ -50,9 +52,11 @@ public class XbeeReceiveInfos {
 			int direction,
 			int distance										
 			) throws Exception {
-	
-	log.info("start XbeeReceiveInfos");
 		
+    log.addAppender(new ConsoleAppender(new PatternLayout("%-6r [%p] %c - %m%n")));
+    
+    log.debug("Start");
+	
 		XBee xbee = new XBee();	
 		log.info("start XBee");
 
