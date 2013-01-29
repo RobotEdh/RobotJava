@@ -44,21 +44,20 @@ public class XbeeReceiveInfos {
 	public static final int RESP_INFOS = 0x01;
 
 	public XbeeReceiveInfos(
-			int Function,
+			int State,
 			int SpeedMotorRight,
 			int SpeedMotorLeft,
-			int TickRight,
-			int TickLeft,
+			int nb_go,
+			int nb_obstacle,
 			int direction,
 			int distance										
 			) throws Exception {
 		
-    log.addAppender(new ConsoleAppender(new PatternLayout("%-6r [%p] %c - %m%n")));
+        log.addAppender(new ConsoleAppender(new PatternLayout("%-6r [%p] %c - %m%n")));
     
-    log.debug("Start");
+        log.debug("Start");
 	
 		XBee xbee = new XBee();	
-		log.info("start XBee");
 
 		int resp = 0;
 
@@ -67,7 +66,7 @@ public class XbeeReceiveInfos {
 			log.info("COM14");
 	
 				try {
-					XBeeResponse response = xbee.getResponse();
+					XBeeResponse response = xbee.getResponse(5000);
 					log.info("xbee.getResponse");
 														
 					if (response.isError()) {
@@ -88,21 +87,21 @@ public class XbeeReceiveInfos {
  						}
  						else
  						{	
- 							// byte 1: Function
- 							log.info("Function:" + ((RxResponse64) response).getData()[1]);
- 							Function = ((RxResponse64) response).getData()[1];
+ 							// byte 1: State
+ 							log.info("State:" + ((RxResponse64) response).getData()[1]);
+ 							State = ((RxResponse64) response).getData()[1];
  							// byte 2: SpeedMotorRight
  							log.info("SpeedMotorRight:" + ((RxResponse64) response).getData()[2]);
  							SpeedMotorRight = ((RxResponse64) response).getData()[2];
  							// byte 3: SpeedMotorLeft
  							log.info("SpeedMotorLeft:" + ((RxResponse64) response).getData()[3]);
  							SpeedMotorLeft = ((RxResponse64) response).getData()[3];							
- 							// byte 4: TickRight
- 							log.info("TickRight:" + ((RxResponse64) response).getData()[4]);
- 							TickRight = ((RxResponse64) response).getData()[4];	
- 							// byte 5: TickLeft
- 							log.info("TickLeft:" + ((RxResponse64) response).getData()[5]);
- 							TickLeft = ((RxResponse64) response).getData()[5];	
+ 							// byte 4: nb_go
+ 							log.info("nb_go:" + ((RxResponse64) response).getData()[4]);
+ 							nb_go = ((RxResponse64) response).getData()[4];	
+ 							// byte 5: nb_obstacle
+ 							log.info("nb_obstacle:" + ((RxResponse64) response).getData()[5]);
+ 							nb_obstacle = ((RxResponse64) response).getData()[5];	
  							// byte 6: Direction
  							log.info("Direction:" + ((RxResponse64) response).getData()[6]);
  							direction = ((RxResponse64) response).getData()[6];

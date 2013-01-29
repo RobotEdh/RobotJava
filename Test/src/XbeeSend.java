@@ -19,7 +19,6 @@ public class XbeeSend {
 	
 	private final static Logger log = Logger.getLogger(XbeeSend.class);
 
-	
 	public static final int CMD_START = 0x01;
 	public static final int CMD_STOP = 0x02;
 	public static final int CMD_INFOS = 0x03;
@@ -35,27 +34,23 @@ public class XbeeSend {
 
 	    XBee xbee = new XBee();
 
-		final int sleep = 5000;
-
 		int errors = 0;
 		int ackErrors = 0;
 		int ccaErrors = 0;
 		int purgeErrors = 0;
 		
 		try {
-
 			    xbee.open("COM14", 9600);
 
 			    XBeeAddress64 destination = new XBeeAddress64(0, 0x13, 0xa2, 0, 0x40, 0x7b, 0xea, 0x23);
 			    int frameId = 0x12;
 			    
 				TxRequest64 tx = new TxRequest64(destination, frameId, cmd);
-						
-			
+		
 			    for (int i=0; i <cmd.length; i++) {
-					log.debug("Send : " + (char)cmd[i]);
+					log.debug("Send : " + i +"->"+ cmd[i]);
 				}
-			    
+			   
 				xbee.sendSynchronous(tx, 5000);
 
 				XBeeResponse response = null;
@@ -93,15 +88,12 @@ public class XbeeSend {
 					}
 				}
 
-				//Thread.sleep(sleep);
-				log.debug("Send OK");
+   			log.debug("Send OK");
 		
 		} finally {
 			xbee.close();
+			Thread.sleep(1000);//sleep for 1000 ms
 			log.debug("End Send");
 		}
 	}
-
-
-
 }

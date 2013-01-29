@@ -3,6 +3,7 @@
 	<name>Test</name>
 	<comment></comment>
 	<projects>
+		<project>xbee-api</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

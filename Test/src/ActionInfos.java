@@ -14,11 +14,11 @@ public class ActionInfos extends AbstractAction {
 	
 	private RobotWindow window;
 	private int cmd[] =  {XbeeSend.CMD_INFOS};
-	private int Function;
+	private int State;
 	private int SpeedMotorRight;
 	private int SpeedMotorLeft;
-	private int TickRight;
-	private int TickLeft;
+	private int nb_go;
+	private int nb_obstacle;
 	private int direction;
 	private int distance;	
 	
@@ -36,36 +36,37 @@ public class ActionInfos extends AbstractAction {
 	    try {
 	    	XbeeSend a = new XbeeSend(cmd);
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	    
 		 try {
 			XbeeReceiveInfos b = new XbeeReceiveInfos (
-					 Function,
+					 State,
 					 SpeedMotorRight,
 					 SpeedMotorLeft,
-					 TickRight,
-					 TickLeft,
+					 nb_go,
+					 nb_obstacle,
 					 direction,
 					 distance);
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}	
 	} 
 	
+	public int getState(){
+		return State;
+	}
 	public int getSpeedMotorRight(){
 		return SpeedMotorRight;
 	}
 	public int getSpeedMotorLeft(){
 		return SpeedMotorLeft;
 	}
-	public int getTickRight(){
-		return TickRight;
+	public int getnb_go(){
+		return nb_go;
 	}
-	public int getTickLeft(){
-		return TickLeft;
+	public int getnb_obstacle(){
+		return nb_obstacle;
 	}
 	public int getdirection(){
 		return direction;
