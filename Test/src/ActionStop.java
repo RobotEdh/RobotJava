@@ -24,8 +24,7 @@ private final static Logger log = Logger.getLogger(ActionStart.class);
 	
 	public void actionPerformed(ActionEvent e) { 
 		
-		log.addAppender(new ConsoleAppender(new PatternLayout("%-6r [%p] %c - %m%n")));
-		
+		log.addAppender(new ConsoleAppender(new PatternLayout("%d{HH:mm:ss,SSS} [%p] %c.%L - %m%n")));
 		log.debug("Start");
 		
 	    try {

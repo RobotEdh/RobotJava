@@ -21,7 +21,6 @@ public class PanelPicture extends JPanel{
 	
 	public PanelPicture(String filename){
 		photo = getToolkit().getImage(filename) ;
-	    System.out.println(filename);
     }
     public void paintComponent(Graphics g){
     	super.paintComponent(g) ;

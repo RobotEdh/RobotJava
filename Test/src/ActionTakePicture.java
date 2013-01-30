@@ -20,8 +20,6 @@ public class ActionTakePicture extends AbstractAction {
 	private String filename;
 	private int pictno = 0;
 	
-
-	
 	public ActionTakePicture(RobotWindow window, String texte){
 		super(texte);
 		
@@ -30,26 +28,21 @@ public class ActionTakePicture extends AbstractAction {
 	
 	public void actionPerformed(ActionEvent e) { 
 		
-		log.addAppender(new ConsoleAppender(new PatternLayout("%-6r [%p] %c - %m%n")));
-		
+		log.addAppender(new ConsoleAppender(new PatternLayout("%d{HH:mm:ss,SSS} [%p] %c.%L - %m%n")));
 		log.debug("Start");
 	    
 	    try {
 	    	XbeeSend a = new XbeeSend(cmd);
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-	    
-    
+
 	    pictno++;
 	    filename = "PICT" + pictno + ".jpg";
-	    System.out.println(filename);
 	    	
 	    try {
 			XbeeReceiveFile b = new XbeeReceiveFile(filename);
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	    

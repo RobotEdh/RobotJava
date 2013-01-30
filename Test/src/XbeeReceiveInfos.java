@@ -18,19 +18,16 @@
  */
 
 import org.apache.log4j.ConsoleAppender;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
-
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 
 import com.rapplogic.xbee.api.ApiId;
 import com.rapplogic.xbee.api.ErrorResponse;
 import com.rapplogic.xbee.api.XBee;
 import com.rapplogic.xbee.api.XBeeResponse;
-import com.rapplogic.xbee.api.wpan.RxResponse16;
 import com.rapplogic.xbee.api.wpan.RxResponse64;
+import com.rapplogic.xbee.api.wpan.TxStatusResponse;
 
 /**
  * Receive a TX Request containing Msg and waits for TX status packet.
@@ -53,34 +50,28 @@ public class XbeeReceiveInfos {
 			int distance										
 			) throws Exception {
 		
-        log.addAppender(new ConsoleAppender(new PatternLayout("%-6r [%p] %c - %m%n")));
-    
-        log.debug("Start");
-	
-		XBee xbee = new XBee();	
+	    log.addAppender(new ConsoleAppender(new PatternLayout("%d{HH:mm:ss,SSS} [%p] %c.%L - %m%n")));
+	    log.debug("Start");
 
 		int resp = 0;
-
-		try {			
+		XBee xbee = new XBee();
+		
+		try {	
 			xbee.open("COM14", 9600);
-			log.info("COM14");
 	
-				try {
-					XBeeResponse response = xbee.getResponse(5000);
-					log.info("xbee.getResponse");
-														
-					if (response.isError()) {
-						log.info("response contains errors", ((ErrorResponse)response).getException());
+			XBeeResponse response = xbee.getResponse(5000); // wait 5s
+			log.debug("getResponse");
 						
-					} else if (response.getApiId() == ApiId.RX_16_RESPONSE) {
-						log.info("Received RX 16 packet " + ((RxResponse16)response));
-						
- 					} else if (response.getApiId() == ApiId.RX_64_RESPONSE) {
- 						log.info("Received RX 64 packet " + ((RxResponse64)response));
+			if (response.getApiId() != ApiId.RX_64_RESPONSE) {
+				log.error("expected RxResponse64 but received: " + response);
+			} else if (response.isError()) {
+					log.error("response contains errors", ((ErrorResponse)response).getException());				
+ 			} else {
+ 						log.debug("Received RX 64 packet " + ((RxResponse64)response));
  						
  						// byte 0: response code, must be = RESP_INFOS
  						resp = ((RxResponse64) response).getData()[0];
- 						log.info("resp: " + resp);
+ 						log.debug("resp: " + resp);
  						if(resp != RESP_INFOS)
  						{
  							log.info("bad resp: " + resp);
@@ -109,20 +100,15 @@ public class XbeeReceiveInfos {
  							log.info("Distance:" + ((RxResponse64) response).getData()[7]);
  							distance = ((RxResponse64) response).getData()[7];
  						}
-					} else {
-						log.info("Ignoring mystery packet " + response.toString());
-					}
-	
-				} catch (Exception e) {
-					log.error(e);
-				}
-				
-			log.debug("Receive OK");
-			 
-		} finally {
+		    }
+		}
+		catch (Exception e) {
+			log.error("exception: " + e.getMessage()+ e.toString());
+		} 
+		finally {
 			xbee.close();
-			log.debug("End Receive");
-			return;
+			Thread.sleep(1000);//sleep for 1000 ms
+			log.debug("End");
 		}
 	}		
 	

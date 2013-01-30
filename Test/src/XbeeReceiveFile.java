@@ -43,76 +43,56 @@ public class XbeeReceiveFile {
 
 	public XbeeReceiveFile(String filename) throws Exception {
 		
-    log.addAppender(new ConsoleAppender(new PatternLayout("%-6r [%p] %c - %m%n")));
-    
-    log.debug("Start");
+		log.addAppender(new ConsoleAppender(new PatternLayout("%d{HH:mm:ss,SSS} [%p] %c.%L - %m%n")));
+		log.debug("Start");
 		 
-	log.info("start XbeeReceiveFile, open:" + filename);
-		  
-	OutputStream out = null;
-	out = new BufferedOutputStream(new FileOutputStream(filename));
+		log.info("filename:" + filename);
+	
+		int Endofdata = 0;	  
+	
+		OutputStream out = null;
+		out = new BufferedOutputStream(new FileOutputStream(filename));
 		
 		XBee xbee = new XBee();	
-		log.info("start XBee");
-
-		long Endofdata = 0;
 
 		try {			
 
 			xbee.open("COM14", 9600);
-			log.info("COM14");
-
+			log.debug("open COM14");
 		
 			while (Endofdata == 0) {
 
-				try {
-					XBeeResponse response = xbee.getResponse();
-					log.info("xbee.getResponse");
+					XBeeResponse response = xbee.getResponse(10000); // wait 10s
+					log.debug("getResponse");
 														
-					if (response.isError()) {
-						log.info("response contains errors", ((ErrorResponse)response).getException());
-					}
-				
- 					if (response.getApiId() == ApiId.RX_16_RESPONSE) {
-						log.info("Received RX 16 packet " + ((RxResponse16)response));
- 					} else if (response.getApiId() == ApiId.RX_64_RESPONSE) {
- 						log.info("Received RX 64 packet " + ((RxResponse64)response));
- 						Endofdata = ((RxResponse64) response).getData()[0];
- 						log.info("Endofdata: " + Endofdata);
- 						for (int i = 1; i < ((RxResponse64) response).getData().length; i++) // start at 1 to ignore first byte
- 						{
- 							log.info("::" + ((RxResponse64) response).getData()[i]);
- 							out.write(((RxResponse64) response).getData()[i]);
- 						
- 						}
-					} else {
-						log.info("Ignoring mystery packet " + response.toString());
-					}
-
-				
-					
-				} catch (Exception e) {
-					log.error(e);
-				}
-				
-			}
-			log.debug("Receive OK");
-			out.close();
-			log.debug("Close file OK");
-			 
-		} finally {
-			xbee.close();
-			log.debug("End Receive");
-			return;
+					if (response.getApiId() != ApiId.RX_64_RESPONSE) {
+						log.error("expected RxResponse64 but received: " + response);
+					} else if (response.isError()) {
+							log.error("response contains errors", ((ErrorResponse)response).getException());				
+		 			} else {
+		 					log.debug("Received RX 64 packet " + ((RxResponse64)response));
+		 					Endofdata = ((RxResponse64) response).getData()[0];
+		 					log.info("Endofdata: " + Endofdata);
+		 					
+		 					for (int i = 1; i < ((RxResponse64) response).getData().length; i++) // start at 1 to ignore first byte
+		 					{
+		 							//log.info("::" + ((RxResponse64) response).getData()[i]);
+		 							out.write(((RxResponse64) response).getData()[i]);				
+		 					}
+		 			}
+			}  // while
 		}
+		catch (Exception e) {
+				log.error("exception: " + e.getMessage()+ e.toString());
+		} 
+		finally {
+				out.close();
+				xbee.close();
+				Thread.sleep(1000);//sleep for 1000 ms
+				log.debug("End");	
+	    }
 		
 	}
 
-
-	
-	public Boolean DataToRead() {
-		return false;
-	}
-	
 	
 }

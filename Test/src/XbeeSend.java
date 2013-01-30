@@ -26,74 +26,58 @@ public class XbeeSend {
 	
 	public XbeeSend(int cmd[]) throws Exception {
 		
-	    log.addAppender(new ConsoleAppender(new PatternLayout("%-6r [%p] %c - %m%n")));
-		
+	    log.addAppender(new ConsoleAppender(new PatternLayout("%d{HH:mm:ss,SSS} [%p] %c.%L - %m%n")));
 	    log.debug("Start");
-	    log.debug("length:" + cmd.length);
-	    log.debug("cmd[0]:" + cmd[0]);
-
-	    XBee xbee = new XBee();
-
-		int errors = 0;
-		int ackErrors = 0;
-		int ccaErrors = 0;
-		int purgeErrors = 0;
+	
+	    int frameId = 0x12;
+		XBee xbee = new XBee();	
 		
-		try {
-			    xbee.open("COM14", 9600);
+		try {		    
+				xbee.open("COM14", 9600);
 
 			    XBeeAddress64 destination = new XBeeAddress64(0, 0x13, 0xa2, 0, 0x40, 0x7b, 0xea, 0x23);
-			    int frameId = 0x12;
 			    
 				TxRequest64 tx = new TxRequest64(destination, frameId, cmd);
 		
 			    for (int i=0; i <cmd.length; i++) {
-					log.debug("Send : " + i +"->"+ cmd[i]);
+					log.debug("cmd [" + i +"]= "+ cmd[i]);
 				}
 			   
-				xbee.sendSynchronous(tx, 5000);
+				xbee.sendSynchronous(tx, 5000);  // send waits 5s
 
 				XBeeResponse response = null;
 
-				while (true) {
-					// blocks until we get response
-					response = xbee.getResponse();
-
-					if (response.getApiId() != ApiId.TX_STATUS_RESPONSE) {
-						log.debug("expected tx status but received " + response);
-					} else {
-						if (((TxStatusResponse) response).getFrameId() != frameId) {
-							throw new RuntimeException("frame id does not match");
+				response = xbee.getResponse();
+				log.debug("getResponse");
+				
+				if (response.getApiId() != ApiId.TX_STATUS_RESPONSE) {
+						log.error("expected tx status but received: " + response);
+				} else if (((TxStatusResponse) response).getFrameId() != frameId) {
+					    log.error("Bad frame Id");
+				} else if (((TxStatusResponse) response).getStatus() != TxStatusResponse.Status.SUCCESS) {
+                        // error
+						if (((TxStatusResponse) response).isAckError()) {
+							log.error("Tx status failure: AckError" );
+						} else if (((TxStatusResponse) response).isCcaError()) {
+							log.error("Tx status failure: CcaError" );
+						} else if (((TxStatusResponse) response).isPurged()) {
+							log.error("Tx status failure: purged" );
+						}else {
+							log.error("Tx status failure with status: " + ((TxStatusResponse) response).getStatus());
 						}
-
-						if (((TxStatusResponse) response).getStatus() != TxStatusResponse.Status.SUCCESS) {
-							errors++;
-
-							if (((TxStatusResponse) response).isAckError()) {
-								ackErrors++;
-							} else if (((TxStatusResponse) response).isCcaError()) {
-								ccaErrors++;
-							} else if (((TxStatusResponse) response).isPurged()) {
-								purgeErrors++;
-							}
-
-							log.debug("Tx status failure with status: " + ((TxStatusResponse) response).getStatus());
-						} else {
-							// success
-							log.debug("Success, errors is " + errors + ", in "  + ", ack errors "
-									+ ackErrors + ", ccaErrors " + ccaErrors + ", purge errors " + purgeErrors);
-						}
-
-						break;
-					}
+				} else {
+						// success
+						log.debug("Tx status Success");
 				}
-
-   			log.debug("Send OK");
 		
-		} finally {
+		}
+		catch (Exception e) {
+			log.error("exception: " + e.getMessage()+ e.toString());
+		}
+		finally {
 			xbee.close();
 			Thread.sleep(1000);//sleep for 1000 ms
-			log.debug("End Send");
+			log.debug("End");
 		}
 	}
 }
