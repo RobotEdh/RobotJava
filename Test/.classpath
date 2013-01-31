@@ -3,10 +3,10 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/xbee-api"/>
-	<classpathentry kind="lib" path="log4j.jar"/>
-	<classpathentry kind="lib" path="D:/EDH/Electronique/Robots/xbee-api-0.9/lib/RXTXcomm.jar">
+	<classpathentry kind="lib" path="/xbee-api/lib/log4j.jar"/>
+	<classpathentry kind="lib" path="/xbee-api/lib/RXTXcomm.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/EDH/Electronique/Robots/xbee-api-0.9"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="xbee-api"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>

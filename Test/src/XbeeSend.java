@@ -6,6 +6,7 @@ import com.rapplogic.xbee.api.ApiId;
 import com.rapplogic.xbee.api.XBee;
 import com.rapplogic.xbee.api.XBeeAddress64;
 import com.rapplogic.xbee.api.XBeeResponse;
+import com.rapplogic.xbee.api.XBeeTimeoutException;
 import com.rapplogic.xbee.api.wpan.TxRequest64;
 import com.rapplogic.xbee.api.wpan.TxStatusResponse;
 ;
@@ -42,12 +43,9 @@ public class XbeeSend {
 			    for (int i=0; i <cmd.length; i++) {
 					log.debug("cmd [" + i +"]= "+ cmd[i]);
 				}
-			   
-				xbee.sendSynchronous(tx, 5000);  // send waits 5s
 
-				XBeeResponse response = null;
-
-				response = xbee.getResponse();
+				XBeeResponse response = xbee.sendSynchronous(tx, 5*1000);  // send a request and wait up to 5 seconds for the response
+	
 				log.debug("getResponse");
 				
 				if (response.getApiId() != ApiId.TX_STATUS_RESPONSE) {
@@ -76,7 +74,7 @@ public class XbeeSend {
 		}
 		finally {
 			xbee.close();
-			Thread.sleep(1000);//sleep for 1000 ms
+			Thread.sleep(1*1000); //sleep for 1 second
 			log.debug("End");
 		}
 	}

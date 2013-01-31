@@ -62,7 +62,7 @@ public class XbeeReceiveFile {
 		
 			while (Endofdata == 0) {
 
-					XBeeResponse response = xbee.getResponse(10000); // wait 10s
+					XBeeResponse response = xbee.getResponse(10*1000); // wait 10 seconds
 					log.debug("getResponse");
 														
 					if (response.getApiId() != ApiId.RX_64_RESPONSE) {
@@ -88,7 +88,7 @@ public class XbeeReceiveFile {
 		finally {
 				out.close();
 				xbee.close();
-				Thread.sleep(1000);//sleep for 1000 ms
+				Thread.sleep(1*1000); //sleep for 1 second
 				log.debug("End");	
 	    }
 		

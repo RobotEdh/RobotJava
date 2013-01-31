@@ -59,7 +59,7 @@ public class XbeeReceiveInfos {
 		try {	
 			xbee.open("COM14", 9600);
 	
-			XBeeResponse response = xbee.getResponse(5000); // wait 5s
+			XBeeResponse response = xbee.getResponse(5*1000); // wait 5 seconds
 			log.debug("getResponse");
 						
 			if (response.getApiId() != ApiId.RX_64_RESPONSE) {
@@ -107,7 +107,7 @@ public class XbeeReceiveInfos {
 		} 
 		finally {
 			xbee.close();
-			Thread.sleep(1000);//sleep for 1000 ms
+			Thread.sleep(1*1000); //sleep for 1 second
 			log.debug("End");
 		}
 	}		
