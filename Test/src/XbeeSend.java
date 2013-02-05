@@ -20,10 +20,14 @@ public class XbeeSend {
 	
 	private final static Logger log = Logger.getLogger(XbeeSend.class);
 
-	public static final int CMD_START = 0x01;
-	public static final int CMD_STOP = 0x02;
-	public static final int CMD_INFOS = 0x03;
-	public static final int CMD_PICTURE = 0x04;
+	public static final int CMD_START =         0x01;
+	public static final int CMD_STOP =          0x02;
+	public static final int CMD_INFOS =         0x03;
+	public static final int CMD_PICTURE =       0x04;
+	public static final int CMD_TURN_RIGHT =    0x05;
+	public static final int CMD_TURN_LEFT =     0x06;
+	public static final int CMD_CHECK_AROUND =  0x07;
+	public static final int CMD_MOVE_TILT_PAN = 0x08;
 	
 	public XbeeSend(int cmd[]) throws Exception {
 		
@@ -74,7 +78,7 @@ public class XbeeSend {
 		}
 		finally {
 			xbee.close();
-			Thread.sleep(1*1000); //sleep for 1 second
+			Thread.sleep(1*1000); //sleep for 1 second time to close the xbee threads
 			log.debug("End");
 		}
 	}

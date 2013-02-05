@@ -52,8 +52,8 @@ public class XbeeReceiveFile {
 	
 		OutputStream out = null;
 		out = new BufferedOutputStream(new FileOutputStream(filename));
-		
-		XBee xbee = new XBee();	
+
+		XBee xbee = new XBee();
 
 		try {			
 
@@ -61,7 +61,7 @@ public class XbeeReceiveFile {
 			log.debug("open COM14");
 		
 			while (Endofdata == 0) {
-
+				    log.debug("XBeeResponse response = xbee.getResponse(10*1000)");
 					XBeeResponse response = xbee.getResponse(10*1000); // wait 10 seconds
 					log.debug("getResponse");
 														
@@ -88,7 +88,7 @@ public class XbeeReceiveFile {
 		finally {
 				out.close();
 				xbee.close();
-				Thread.sleep(1*1000); //sleep for 1 second
+				Thread.sleep(1*1000); //sleep for 1 second time to close the xbee threads
 				log.debug("End");	
 	    }
 		
