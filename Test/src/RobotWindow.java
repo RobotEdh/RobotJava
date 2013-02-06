@@ -12,33 +12,29 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 public class RobotWindow extends JFrame{
 
-	private JLabel labelSpeedMotorRight;
-	private int SpeedMotorRight = 0;
-	private JLabel labelSpeedMotorLeft;
-	private int SpeedMotorLeft = 0;
-	private JLabel labelTickRight;
-	private int TickRight = 0;
-	private JLabel labelTickLeft;
-	private int TickLeft = 0;
-	private JLabel labeldirection;
-	private int direction = 0;
-	private JLabel labeldistance;
-	private int distance = 0;
 	public static JTextField textAlpha;
 	public static JSlider sliderHorizontal;
 	public static JSlider sliderVertical;
+	public static JLabel labelCheckAround;
+	
+	public static JLabel labelState;
+	public static JLabel labelSpeedMotorRight;
+	public static JLabel labelSpeedMotorLeft;
+	public static JLabel labelnb_go;
+	public static JLabel labelnb_obstacle;
+	public static JLabel labeldirection;
+	public static JLabel labeldistance;;
 	
 	public RobotWindow(){
 		super();
@@ -64,21 +60,27 @@ public class RobotWindow extends JFrame{
 		panel.setBackground(Color.lightGray);
 		
 		Font font = new Font("Arial", Font.BOLD, 12);
+		TitledBorder title;
 					
 		JButton boutonStart = new JButton(new ActionStart(this, "Start"));
 		JButton boutonStop = new JButton(new ActionStop(this, "Stop"));
 		JButton boutonInfos = new JButton(new ActionInfos(this, "Get infos"));
 		
 		JButton boutonTurnLeft = new JButton(new ActionTurnLeft(this, "Turn Left"));
-		textAlpha = new JTextField("0");
+		textAlpha = new JTextField("00");
 		textAlpha.setHorizontalAlignment(JTextField.CENTER);
-		textAlpha.setForeground(Color.red);
+		textAlpha.setForeground(Color.BLACK);
 		textAlpha.setOpaque(true);
 		textAlpha.setBackground(Color.WHITE);
 		textAlpha.setFont(font);
+		title = BorderFactory.createTitledBorder(
+				BorderFactory.createLineBorder(Color.black), "0 < Angle to turn < 90");
+        title.setTitleJustification(TitledBorder.CENTER);
+        textAlpha.setBorder(title);
+		
 		
 		JButton boutonTurnRight = new JButton(new ActionTurnRight(this, "Turn Right"));
-		
+				
 		JButton boutonMoveTiltPan = new JButton(new ActionMoveTiltPan (this, "Move Tilt&Pan"));
 		
 		
@@ -95,9 +97,17 @@ public class RobotWindow extends JFrame{
 		sliderVertical.setFont(font);
 		
 		JButton boutonCheckAround = new JButton(new ActionCheckAround(this, "Check Around"));
+		labelCheckAround = new JLabel("unknown");
+		labelCheckAround.setForeground(Color.blue);
+		labelCheckAround.setOpaque(true);
+		labelCheckAround.setFont(font);
+		labelCheckAround.setHorizontalAlignment(JLabel.CENTER);	
+		title = BorderFactory.createTitledBorder(
+				BorderFactory.createLineBorder(Color.black), "Direction to go");
+        title.setTitleJustification(TitledBorder.CENTER);
+        labelCheckAround.setBorder(title);
 		
 		JButton boutonTakePicture = new JButton(new ActionTakePicture(this, "Take picture"));
-		JButton boutonDummy = new JButton();
 		
 		panel.add(boutonStart);
 		panel.add(boutonStop);
@@ -113,85 +123,94 @@ public class RobotWindow extends JFrame{
 		panel.add(sliderVertical);
 		
 		panel.add(boutonCheckAround);
+		panel.add(labelCheckAround);
+		
 		panel.add(boutonTakePicture);
-		panel.add(boutonDummy);
 
 		return panel;
 	}
 	
 	private JPanel buildContentPanel2(){
 		JPanel panel2 = new JPanel();
-		panel2.setLayout(new GridLayout(2, 0));
-		panel2.setBackground(Color.lightGray);
-		panel2.setBorder(BorderFactory.createLineBorder(Color.black));
+		panel2.setLayout(new FlowLayout(FlowLayout.LEFT));
+		
+		TitledBorder title = BorderFactory.createTitledBorder(
+				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Infos");
+        title.setTitleJustification(TitledBorder.CENTER);
+        panel2.setBorder(title);
+        
 		
 		Font font = new Font("Arial", Font.BOLD, 12);
-					
-		labelSpeedMotorRight = new JLabel("Speed Motor Right: " + SpeedMotorRight);
-		labelSpeedMotorLeft  = new JLabel("Speed Motor Left: " + SpeedMotorLeft);
 		
-		labelSpeedMotorRight.setForeground(Color.red);
+		labelState = new JLabel("State: ?");
+		labelState.setForeground(Color.blue);
+		labelState.setOpaque(true);
+		labelState.setFont(font);
+		labelState.setHorizontalAlignment(JLabel.LEFT);
+		
+		panel2.add(labelState);
+		
+		labelSpeedMotorRight = new JLabel("Speed Motor Right: ?");
+		labelSpeedMotorLeft  = new JLabel("Speed Motor Left: ?");
+		labelSpeedMotorRight.setForeground(Color.blue);
 		labelSpeedMotorRight.setOpaque(true);
-		labelSpeedMotorRight.setBackground(Color.WHITE);
 		labelSpeedMotorRight.setFont(font);
-		labelSpeedMotorLeft.setForeground(Color.red);
+		labelSpeedMotorRight.setHorizontalAlignment(JLabel.LEFT);
+		labelSpeedMotorLeft.setForeground(Color.blue);
 		labelSpeedMotorLeft.setOpaque(true);
-		labelSpeedMotorLeft.setBackground(Color.WHITE);
 		labelSpeedMotorLeft.setFont(font);
+		labelSpeedMotorLeft.setHorizontalAlignment(JLabel.LEFT);
 	
 		panel2.add(labelSpeedMotorRight);
 		panel2.add(labelSpeedMotorLeft);
+		
+			
+		labelnb_go = new JLabel("Nb go: ?");
+		labelnb_obstacle = new JLabel("Nb obstacle: ?");
+		labelnb_go.setForeground(Color.blue);
+		labelnb_go.setOpaque(true);
+		labelnb_go.setFont(font);
+		labelnb_go.setHorizontalAlignment(JLabel.LEFT);
+		labelnb_obstacle.setForeground(Color.blue);
+		labelnb_obstacle.setOpaque(true);
+		labelnb_obstacle.setFont(font);
+		labelnb_obstacle.setHorizontalAlignment(JLabel.LEFT);
+		
+		panel2.add(labelnb_go);
+		panel2.add(labelnb_obstacle);
+		
+		labeldirection  = new JLabel("Direction: ?");
+		labeldistance  = new JLabel("Distance: ?");
+		labeldirection.setForeground(Color.blue);
+		labeldirection.setOpaque(true);
+		labeldirection.setFont(font);
+		labeldirection.setHorizontalAlignment(JLabel.LEFT);
+		labeldistance.setForeground(Color.blue);
+		labeldistance.setOpaque(true);
+		labeldistance.setFont(font);
+		labeldistance.setHorizontalAlignment(JLabel.LEFT);
+	
+		panel2.add(labeldirection);
+		panel2.add(labeldistance);
 
 		return panel2;
 	}
 	
 	private JPanel buildContentPanel3(){
 		JPanel panel3 = new JPanel();
-		panel3.setLayout(new GridLayout(2, 0));
-		panel3.setBackground(Color.lightGray);
+		panel3.setLayout(new FlowLayout(FlowLayout.LEFT));
 		
 		Font font = new Font("Arial", Font.BOLD, 12);
-					
-		labelTickRight  = new JLabel("Tick Right: " + TickRight);
-		labelTickLeft  = new JLabel("Tick Left: " + TickLeft);
-		
-		labelTickRight.setForeground(Color.red);
-		labelTickRight.setOpaque(true);
-		labelTickRight.setBackground(Color.WHITE);
-		labelTickRight.setFont(font);
-		labelTickLeft.setForeground(Color.red);
-		labelTickLeft.setOpaque(true);
-		labelTickLeft.setBackground(Color.WHITE);
-		labelTickLeft.setFont(font);
-
-		panel3.add(labelTickRight);
-		panel3.add(labelTickLeft);
 
 		return panel3;
 	}
 	
 	private JPanel buildContentPanel4(){
 		JPanel panel4 = new JPanel();
-		panel4.setLayout(new GridLayout(2, 0));
-		panel4.setBackground(Color.lightGray);
+		panel4.setLayout(new FlowLayout(FlowLayout.LEFT));
 		
 		Font font = new Font("Arial", Font.BOLD, 12);
-					
-		labeldirection  = new JLabel("Direction: " + direction);
-		labeldistance  = new JLabel("Distance: " + distance);
-		
-		labeldirection.setForeground(Color.red);
-		labeldirection.setOpaque(true);
-		labeldirection.setBackground(Color.WHITE);
-		labeldirection.setFont(font);
-		labeldistance.setForeground(Color.red);
-		labeldistance.setOpaque(true);
-		labeldistance.setBackground(Color.WHITE);
-		labeldistance.setFont(font);
 	
-		panel4.add(labeldirection);
-		panel4.add(labeldistance);
-
 		return panel4;
 	}
 }	

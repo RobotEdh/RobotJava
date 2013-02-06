@@ -11,6 +11,9 @@ import org.apache.log4j.PatternLayout;
 public class ActionCheckAround extends AbstractAction {
 	
 	private final static Logger log = Logger.getLogger(ActionCheckAround.class);
+	public static final int OBSTACLE = -2;
+	public static final int LEFT_DIRECTION = 1;
+	public static final int RIGHT_DIRECTION = 2;
 	
 	private RobotWindow window;
 	private int cmd[] =  {XbeeSend.CMD_CHECK_AROUND};
@@ -37,12 +40,23 @@ public class ActionCheckAround extends AbstractAction {
 			 XbeeReceiveDirection b = new XbeeReceiveDirection (direction_to_go);
 		} catch (Exception e1) {
 			e1.printStackTrace();
-		}	
+		}
+		
+		 switch (direction_to_go)
+		 {
+		 case LEFT_DIRECTION:
+			 RobotWindow.labelCheckAround.setText("Left");
+		 break;
+		 case RIGHT_DIRECTION:
+			 RobotWindow.labelCheckAround.setText("Right");
+		 break;
+		 case OBSTACLE:
+			 RobotWindow.labelCheckAround.setText("Obstacle");
+		 break;
+		 default:
+			 RobotWindow.labelCheckAround.setText("Unknown");
+		 }
 	} 
-	
-	public int getdirection_to_go(){
-		return direction_to_go;
-	}
-	
-	
+
+		
 }

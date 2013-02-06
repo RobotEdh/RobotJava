@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -11,6 +12,9 @@ import org.apache.log4j.PatternLayout;
 public class ActionInfos extends AbstractAction {
 	
 	private final static Logger log = Logger.getLogger(ActionInfos.class);
+	
+	public static final int STATE_STOP = 0x00;
+	public static final int STATE_GO   = 0x01;
 	
 	private RobotWindow window;
 	private int cmd[] =  {XbeeSend.CMD_INFOS};
@@ -50,29 +54,27 @@ public class ActionInfos extends AbstractAction {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}	
+		
+		 switch (State)
+		 {
+		 case STATE_STOP:
+			 RobotWindow.labelState.setText("State: Stopped");
+			 RobotWindow.labelState.setForeground(Color.red);
+			 break;
+		 case STATE_GO:
+			 RobotWindow.labelState.setText("State: Go");
+			 RobotWindow.labelState.setForeground(Color.green);
+			 break;
+		 default:
+			 RobotWindow.labelState.setText("State: Unknown");
+		 }
+		 RobotWindow.labelSpeedMotorRight.setText("Speed Motor Right: " + Integer.toString(SpeedMotorRight));
+		 RobotWindow.labelSpeedMotorLeft.setText("Speed Motor Left: " + Integer.toString(SpeedMotorLeft));
+		 RobotWindow.labelnb_go.setText("nb go: " + Integer.toString(nb_go));
+		 RobotWindow.labelnb_obstacle.setText("nb obstacle: " + Integer.toString(nb_obstacle));
+		 RobotWindow.labeldirection.setText("direction: " + Integer.toString(direction));
+		 RobotWindow.labeldistance.setText("distance: " + Integer.toString(distance));
+
+	
 	} 
-	
-	public int getState(){
-		return State;
-	}
-	public int getSpeedMotorRight(){
-		return SpeedMotorRight;
-	}
-	public int getSpeedMotorLeft(){
-		return SpeedMotorLeft;
-	}
-	public int getnb_go(){
-		return nb_go;
-	}
-	public int getnb_obstacle(){
-		return nb_obstacle;
-	}
-	public int getdirection(){
-		return direction;
-	}
-	public int getdistance(){
-		return distance;
-	}
-	
-	
 }
