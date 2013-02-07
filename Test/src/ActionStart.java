@@ -21,8 +21,6 @@ public class ActionStart extends AbstractAction {
 	}
 	
 	public void actionPerformed(ActionEvent e) { 
-	    
-		log.addAppender(new ConsoleAppender(new PatternLayout("%d{HH:mm:ss,SSS} [%p] %c.%L - %m%n")));
 		log.debug("Start");
 	    
 	    try {

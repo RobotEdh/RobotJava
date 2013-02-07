@@ -21,13 +21,11 @@ public class ActionTurnRight extends AbstractAction {
 	}
 	
 	public void actionPerformed(ActionEvent e) { 
-	    
-		log.addAppender(new ConsoleAppender(new PatternLayout("%d{HH:mm:ss,SSS} [%p] %c.%L - %m%n")));
 		log.debug("Start");
 		
 		try {
 			cmd[1] = Integer.parseInt(RobotWindow.textAlpha.getText());
-			log.debug(cmd[1]);
+			log.debug("cmd[1]: " + cmd[1]);
 		} catch (Exception e0) {
 			log.error("Invalid number: "+ RobotWindow.textAlpha.getText());
 		}

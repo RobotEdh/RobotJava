@@ -8,7 +8,7 @@ class FramePicture extends JFrame
 {
 	FramePicture(String filename) {
 		setTitle ("PICTURE") ;
-		setSize (800, 500) ;
+		setSize (400, 300) ;
 		panpic = new PanelPicture(filename) ;
 		getContentPane().add(panpic) ;
 	}

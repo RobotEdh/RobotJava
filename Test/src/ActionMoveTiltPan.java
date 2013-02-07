@@ -20,9 +20,7 @@ public class ActionMoveTiltPan extends AbstractAction {
 		this.window = window;
 	}
 	
-	public void actionPerformed(ActionEvent e) { 
-	    
-		log.addAppender(new ConsoleAppender(new PatternLayout("%d{HH:mm:ss,SSS} [%p] %c.%L - %m%n")));
+	public void actionPerformed(ActionEvent e) {  
 		log.debug("Start");
 
 		cmd[1] = RobotWindow.sliderHorizontal.getValue() + 90;

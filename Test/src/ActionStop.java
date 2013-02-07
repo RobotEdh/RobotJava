@@ -9,7 +9,7 @@ import org.apache.log4j.PatternLayout;
 
 public class ActionStop extends AbstractAction {
 	
-private final static Logger log = Logger.getLogger(ActionStart.class);
+private final static Logger log = Logger.getLogger(ActionStop.class);
 	
 	private RobotWindow window;
 	private int cmd[] =  {XbeeSend.CMD_STOP};
@@ -23,8 +23,6 @@ private final static Logger log = Logger.getLogger(ActionStart.class);
 	}
 	
 	public void actionPerformed(ActionEvent e) { 
-		
-		log.addAppender(new ConsoleAppender(new PatternLayout("%d{HH:mm:ss,SSS} [%p] %c.%L - %m%n")));
 		log.debug("Start");
 		
 	    try {

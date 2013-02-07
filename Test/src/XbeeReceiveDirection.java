@@ -41,8 +41,6 @@ public class XbeeReceiveDirection {
 	public static final int RESP_CHECK_AROUND = 0x02;
 
 	public XbeeReceiveDirection(int direction_to_go) throws Exception {
-		
-	    log.addAppender(new ConsoleAppender(new PatternLayout("%d{HH:mm:ss,SSS} [%p] %c.%L - %m%n")));
 	    log.debug("Start");
 
 		int resp = 0;

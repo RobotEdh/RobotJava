@@ -49,8 +49,6 @@ public class XbeeReceiveInfos {
 			int direction,
 			int distance										
 			) throws Exception {
-		
-	    log.addAppender(new ConsoleAppender(new PatternLayout("%d{HH:mm:ss,SSS} [%p] %c.%L - %m%n")));
 	    log.debug("Start");
 
 		int resp = 0;

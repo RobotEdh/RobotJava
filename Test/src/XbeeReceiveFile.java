@@ -42,8 +42,6 @@ public class XbeeReceiveFile {
 	private final static Logger log = Logger.getLogger(XbeeReceiveFile.class);
 
 	public XbeeReceiveFile(String filename) throws Exception {
-		
-		log.addAppender(new ConsoleAppender(new PatternLayout("%d{HH:mm:ss,SSS} [%p] %c.%L - %m%n")));
 		log.debug("Start");
 		 
 		log.info("filename:" + filename);

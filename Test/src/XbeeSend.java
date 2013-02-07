@@ -30,8 +30,6 @@ public class XbeeSend {
 	public static final int CMD_MOVE_TILT_PAN = 0x08;
 	
 	public XbeeSend(int cmd[]) throws Exception {
-		
-	    log.addAppender(new ConsoleAppender(new PatternLayout("%d{HH:mm:ss,SSS} [%p] %c.%L - %m%n")));
 	    log.debug("Start");
 	
 	    int frameId = 0x12;
