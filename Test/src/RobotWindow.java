@@ -90,7 +90,7 @@ public class RobotWindow extends JFrame{
 		sliderHorizontal.setPaintLabels(true);
 		sliderHorizontal.setFont(font);
 		
-		sliderVertical = new JSlider(JSlider.VERTICAL, -90, 90, 0);
+		sliderVertical = new JSlider(JSlider.VERTICAL, -45, 90, 0);
 		sliderVertical.setMajorTickSpacing(45);
 		sliderVertical.setPaintTicks(true);
 		sliderVertical.setPaintLabels(true);
