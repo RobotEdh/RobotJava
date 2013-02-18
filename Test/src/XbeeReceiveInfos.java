@@ -39,15 +39,16 @@ public class XbeeReceiveInfos {
 	private final static Logger log = Logger.getLogger(XbeeReceiveInfos.class);
 	
 	public static final int RESP_INFOS = 0x01;
+	private static int State;
+	private static int SpeedMotorRight;
+	private static int SpeedMotorLeft;
+	private static int nb_go;
+	private static int nb_obstacle;
+	private static int direction;
+	private static int distance;
 
 	public XbeeReceiveInfos(
-			int State,
-			int SpeedMotorRight,
-			int SpeedMotorLeft,
-			int nb_go,
-			int nb_obstacle,
-			int direction,
-			int distance										
+										
 			) throws Exception {
 	    log.debug("Start");
 
@@ -94,6 +95,7 @@ public class XbeeReceiveInfos {
  							// byte 6: Direction
  							log.info("Direction:" + ((RxResponse64) response).getData()[6]);
  							direction = ((RxResponse64) response).getData()[6];
+ 							log.debug("Direction2:"  + direction);
  							// byte 7: Distance
  							log.info("Distance:" + ((RxResponse64) response).getData()[7]);
  							distance = ((RxResponse64) response).getData()[7];
@@ -108,6 +110,29 @@ public class XbeeReceiveInfos {
 			Thread.sleep(1*1000); //sleep for 1 second time to close the xbee threads
 			log.debug("End");
 		}
-	}		
+	}	
+	
+	public static int get_State(){
+		return State;
+    }
+	public static int get_SpeedMotorRight(){
+		return SpeedMotorRight;
+	}
+	public static int get_SpeedMotorLeft(){
+		return SpeedMotorLeft;
+	}
+	public static int get_nb_go(){
+		return nb_go;
+	}
+	public static int get_nb_obstacle(){
+		return nb_obstacle;
+	}
+	public static int get_direction(){
+		return direction;
+	}
+	public static int get_distance(){
+			return distance;
+	}
+	
 	
 }

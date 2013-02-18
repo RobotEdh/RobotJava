@@ -42,19 +42,12 @@ public class ActionInfos extends AbstractAction {
 		}
 	    
 		 try {
-			XbeeReceiveInfos b = new XbeeReceiveInfos (
-					 State,
-					 SpeedMotorRight,
-					 SpeedMotorLeft,
-					 nb_go,
-					 nb_obstacle,
-					 direction,
-					 distance);
+			XbeeReceiveInfos b = new XbeeReceiveInfos ();
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}	
-		
-		 switch (State)
+
+		 switch (XbeeReceiveInfos.get_State())
 		 {
 		 case STATE_STOP:
 			 RobotWindow.labelState.setText("State: Stopped");
@@ -67,12 +60,12 @@ public class ActionInfos extends AbstractAction {
 		 default:
 			 RobotWindow.labelState.setText("State: Unknown");
 		 }
-		 RobotWindow.labelSpeedMotorRight.setText("Speed Motor Right: " + Integer.toString(SpeedMotorRight));
-		 RobotWindow.labelSpeedMotorLeft.setText("Speed Motor Left: " + Integer.toString(SpeedMotorLeft));
-		 RobotWindow.labelnb_go.setText("nb go: " + Integer.toString(nb_go));
-		 RobotWindow.labelnb_obstacle.setText("nb obstacle: " + Integer.toString(nb_obstacle));
-		 RobotWindow.labeldirection.setText("direction: " + Integer.toString(direction));
-		 RobotWindow.labeldistance.setText("distance: " + Integer.toString(distance));
+		 RobotWindow.labelSpeedMotorRight.setText("Speed Motor Right: " + Integer.toString(XbeeReceiveInfos.get_SpeedMotorRight()));
+		 RobotWindow.labelSpeedMotorLeft.setText("Speed Motor Left: " + Integer.toString(XbeeReceiveInfos.get_SpeedMotorLeft()));
+		 RobotWindow.labelnb_go.setText("nb go: " + Integer.toString(XbeeReceiveInfos.get_nb_go()));
+		 RobotWindow.labelnb_obstacle.setText("nb obstacle: " + Integer.toString(XbeeReceiveInfos.get_nb_obstacle()));
+		 RobotWindow.labeldirection.setText("direction: " + Integer.toString(XbeeReceiveInfos.get_direction()));
+		 RobotWindow.labeldistance.setText("distance: " + Integer.toString(XbeeReceiveInfos.get_distance()));
 
 	
 	} 

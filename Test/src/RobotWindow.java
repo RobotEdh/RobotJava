@@ -34,7 +34,9 @@ public class RobotWindow extends JFrame{
 	public static JLabel labelnb_go;
 	public static JLabel labelnb_obstacle;
 	public static JLabel labeldirection;
-	public static JLabel labeldistance;;
+	public static JLabel labeldistance;
+	
+	public static JTextField textMotorNum;
 	
 	public RobotWindow(){
 		super();
@@ -192,16 +194,31 @@ public class RobotWindow extends JFrame{
 	
 		panel2.add(labeldirection);
 		panel2.add(labeldistance);
-
+      
 		return panel2;
 	}
 	
 	private JPanel buildContentPanel3(){
 		JPanel panel3 = new JPanel();
-		panel3.setLayout(new FlowLayout(FlowLayout.LEFT));
+		panel3.setLayout(new FlowLayout());
+		       
+		TitledBorder title = BorderFactory.createTitledBorder(
+				BorderFactory.createLineBorder(Color.black), "1 < Motor to run < 4");
+        title.setTitleJustification(TitledBorder.CENTER);
+        panel3.setBorder(title);
 		
-		Font font = new Font("Arial", Font.BOLD, 12);
+        Font font = new Font("Arial", Font.BOLD, 12);
 
+		textMotorNum = new JTextField("0");
+		textMotorNum.setHorizontalAlignment(JTextField.CENTER);
+		textMotorNum.setForeground(Color.BLACK);
+		textMotorNum.setOpaque(true);
+		textMotorNum.setBackground(Color.WHITE);
+		textMotorNum.setFont(font);
+		textMotorNum.setBorder(null);
+
+		panel3.add(textMotorNum);
+				
 		return panel3;
 	}
 	

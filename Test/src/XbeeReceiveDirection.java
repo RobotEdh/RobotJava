@@ -39,8 +39,9 @@ public class XbeeReceiveDirection {
 	private final static Logger log = Logger.getLogger(XbeeReceiveDirection.class);
 	
 	public static final int RESP_CHECK_AROUND = 0x02;
+	private static int direction_to_go;	
 
-	public XbeeReceiveDirection(int direction_to_go) throws Exception {
+	public XbeeReceiveDirection() throws Exception {
 	    log.debug("Start");
 
 		int resp = 0;
@@ -83,5 +84,9 @@ public class XbeeReceiveDirection {
 			log.debug("End");
 		}
 	}		
+	
+	public static int get_direction_to_go(){
+		return direction_to_go;
+}	
 	
 }

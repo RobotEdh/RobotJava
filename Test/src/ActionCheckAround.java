@@ -17,7 +17,7 @@ public class ActionCheckAround extends AbstractAction {
 	
 	private RobotWindow window;
 	private int cmd[] =  {XbeeSend.CMD_CHECK_AROUND};
-	private int direction_to_go;
+	private static int direction_to_go;
 
 	
 	public ActionCheckAround(RobotWindow window, String texte){
@@ -36,12 +36,12 @@ public class ActionCheckAround extends AbstractAction {
 		}
 	    
 		 try {
-			 XbeeReceiveDirection b = new XbeeReceiveDirection (direction_to_go);
+			 XbeeReceiveDirection b = new XbeeReceiveDirection ();
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		
-		 switch (direction_to_go)
+		 switch (XbeeReceiveDirection.get_direction_to_go())
 		 {
 		 case LEFT_DIRECTION:
 			 RobotWindow.labelCheckAround.setText("Left");
