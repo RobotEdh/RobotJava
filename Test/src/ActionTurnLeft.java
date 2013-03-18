@@ -12,7 +12,8 @@ public class ActionTurnLeft extends AbstractAction {
 	private final static Logger log = Logger.getLogger(ActionTurnLeft.class);
 	
 	private RobotWindow window;
-	private int cmd[] =  {XbeeSend.CMD_TURN_LEFT, 0};
+	private int cmd[] 		= {XbeeSend.CMD_TURN_LEFT, 0};
+	private String szcmd[]	= {HttpSend.CMD_TURN_LEFT, ""};
 	
 	public ActionTurnLeft(RobotWindow window, String texte){
 		super(texte);
@@ -25,14 +26,22 @@ public class ActionTurnLeft extends AbstractAction {
 		
 		try {
 			cmd[1] = Integer.parseInt(RobotWindow.textAlpha.getText());
-			log.debug("cmd[1]: " + cmd[1]);
+			szcmd[1] = Integer.toString(cmd[1]);
+			
 		} catch (Exception e0) {
 			log.error("Invalid number: "+ RobotWindow.textAlpha.getText());
 		}
 	    if (cmd[1] < 0 || cmd[1] > 90) log.error("angle must be between 0 and 90 : "+ RobotWindow.textAlpha.getText());
 		
 	    try {
-	    	XbeeSend a = new XbeeSend(cmd);
+	    	if(Robot.COMTYPE == Robot.XBEECOM)
+	    	{
+	    		XbeeSend a = new XbeeSend(cmd);
+	    	}
+	    	else
+	    	{
+	    		HttpSend a = new HttpSend(szcmd);
+	    	}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

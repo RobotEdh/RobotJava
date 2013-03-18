@@ -38,6 +38,7 @@ public class RobotWindow extends JFrame{
 	
 	public static JTextField textMotorNum;
 	
+
 	public RobotWindow(){
 		super();
 		
@@ -66,7 +67,7 @@ public class RobotWindow extends JFrame{
 					
 		JButton boutonStart = new JButton(new ActionStart(this, "Start"));
 		JButton boutonStop = new JButton(new ActionStop(this, "Stop"));
-		JButton boutonInfos = new JButton(new ActionInfos(this, "Get infos"));
+		JButton boutonInfos = new JButton(new ActionInfos(this, "Infos"));
 		
 		JButton boutonTurnLeft = new JButton(new ActionTurnLeft(this, "Turn Left"));
 		textAlpha = new JTextField("00");

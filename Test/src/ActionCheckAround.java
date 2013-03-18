@@ -16,9 +16,10 @@ public class ActionCheckAround extends AbstractAction {
 	public static final int RIGHT_DIRECTION = 2;
 	
 	private RobotWindow window;
-	private int cmd[] =  {XbeeSend.CMD_CHECK_AROUND};
+	private int cmd[] 		= {XbeeSend.CMD_CHECK_AROUND};
+	private String szcmd[]	= {HttpSend.CMD_CHECK_AROUND};
+	
 	private static int direction_to_go;
-
 	
 	public ActionCheckAround(RobotWindow window, String texte){
 		super(texte);
@@ -28,33 +29,50 @@ public class ActionCheckAround extends AbstractAction {
 	
 	public void actionPerformed(ActionEvent e) { 
 		log.debug("Start");
-	    
-	    try {
-	    	XbeeSend a = new XbeeSend(cmd);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-	    
-		 try {
-			 XbeeReceiveDirection b = new XbeeReceiveDirection ();
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
 		
-		 switch (XbeeReceiveDirection.get_direction_to_go())
-		 {
-		 case LEFT_DIRECTION:
+		if(Robot.COMTYPE == Robot.XBEECOM){
+			try {
+	    		XbeeSend a = new XbeeSend(cmd);
+	  
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+	    
+		 	try {
+		 		XbeeReceiveDirection b = new XbeeReceiveDirection ();
+		 		direction_to_go = XbeeReceiveDirection.get_direction_to_go();
+		 	
+		 	} catch (Exception e1) {
+		 		e1.printStackTrace();
+		 	}
+		}
+	    else
+	    {
+	    	try {
+				HttpSend a = new HttpSend(szcmd);
+					
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		    direction_to_go = Integer.parseInt(HttpSend.get_direction_to_go());
+
+	    }
+		
+		log.debug("direction_to_go: " + direction_to_go);		 
+		switch (direction_to_go)
+		{
+		case LEFT_DIRECTION:
 			 RobotWindow.labelCheckAround.setText("Left");
-		 break;
-		 case RIGHT_DIRECTION:
+		break;
+		case RIGHT_DIRECTION:
 			 RobotWindow.labelCheckAround.setText("Right");
-		 break;
-		 case OBSTACLE:
+		break;
+		case OBSTACLE:
 			 RobotWindow.labelCheckAround.setText("Obstacle");
-		 break;
-		 default:
+		break;
+		default:
 			 RobotWindow.labelCheckAround.setText("Unknown");
-		 }
+		}
 	} 
 
 		

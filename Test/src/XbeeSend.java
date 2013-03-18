@@ -36,7 +36,7 @@ public class XbeeSend {
 		XBee xbee = new XBee();	
 		
 		try {		    
-				xbee.open("COM14", 9600);
+				xbee.open(Robot.Xbeecom, 9600);
 
 			    XBeeAddress64 destination = new XBeeAddress64(0, 0x13, 0xa2, 0, 0x40, 0x7b, 0xea, 0x23);
 			    

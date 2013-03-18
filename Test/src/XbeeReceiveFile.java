@@ -55,8 +55,7 @@ public class XbeeReceiveFile {
 
 		try {			
 
-			xbee.open("COM14", 9600);
-			log.debug("open COM14");
+			xbee.open(Robot.Xbeecom, 9600);
 		
 			while (Endofdata == 0) {
 				    log.debug("XBeeResponse response = xbee.getResponse(10*1000)");

@@ -12,7 +12,8 @@ public class ActionMoveTiltPan extends AbstractAction {
 	private final static Logger log = Logger.getLogger(ActionMoveTiltPan.class);
 	
 	private RobotWindow window;
-	private int cmd[] =  {XbeeSend.CMD_MOVE_TILT_PAN, 0, 0};
+	private int cmd[]		= {XbeeSend.CMD_MOVE_TILT_PAN, 0, 0};
+	private String szcmd[]	= {HttpSend.CMD_MOVE_TILT_PAN, "", ""};
 	
 	public ActionMoveTiltPan(RobotWindow window, String texte){
 		super(texte);
@@ -24,11 +25,19 @@ public class ActionMoveTiltPan extends AbstractAction {
 		log.debug("Start");
 
 		cmd[1] = RobotWindow.sliderHorizontal.getValue() + 90;
+		szcmd[1] = Integer.toString(cmd[1]); 
 		cmd[2] = RobotWindow.sliderVertical.getValue() + 90;
-		log.debug(cmd[1]+"/"+ cmd[2]);
+		szcmd[2] = Integer.toString(cmd[2]); 
 
 	    try {
-	    	XbeeSend a = new XbeeSend(cmd);
+	    	if(Robot.COMTYPE == Robot.XBEECOM)
+	    	{
+	    		XbeeSend a = new XbeeSend(cmd);
+	    	}
+	    	else
+	    	{
+	    		HttpSend a = new HttpSend(szcmd);
+	    	}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

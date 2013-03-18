@@ -12,8 +12,8 @@ public class ActionStop extends AbstractAction {
 private final static Logger log = Logger.getLogger(ActionStop.class);
 	
 	private RobotWindow window;
-	private int cmd[] =  {XbeeSend.CMD_STOP};
-	
+	private int cmd[] 		= {XbeeSend.CMD_STOP};
+	private String szcmd[]	= {HttpSend.CMD_STOP};	
 	
 	
 	public ActionStop(RobotWindow window, String texte){
@@ -26,9 +26,15 @@ private final static Logger log = Logger.getLogger(ActionStop.class);
 		log.debug("Start");
 		
 	    try {
-	    	XbeeSend a = new XbeeSend(cmd);
+	    	if(Robot.COMTYPE == Robot.XBEECOM)
+	    	{
+	    		XbeeSend a = new XbeeSend(cmd);
+	    	}
+	    	else
+	    	{
+	    		HttpSend a = new HttpSend(szcmd);
+	    	}
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 			

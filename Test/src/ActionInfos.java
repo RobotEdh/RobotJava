@@ -17,15 +17,11 @@ public class ActionInfos extends AbstractAction {
 	public static final int STATE_GO   = 0x01;
 	
 	private RobotWindow window;
-	private int cmd[] =  {XbeeSend.CMD_INFOS};
-	private int State;
-	private int SpeedMotorRight;
-	private int SpeedMotorLeft;
-	private int nb_go;
-	private int nb_obstacle;
-	private int direction;
-	private int distance;	
+	private int cmd[] 		= {XbeeSend.CMD_INFOS};
+	private String szcmd[]	= {HttpSend.CMD_INFOS};	
 	
+	private int State;
+
 	public ActionInfos(RobotWindow window, String texte){
 		super(texte);
 		
@@ -35,38 +31,66 @@ public class ActionInfos extends AbstractAction {
 	public void actionPerformed(ActionEvent e) { 
 		log.debug("Start");
 	    
-	    try {
-	    	XbeeSend a = new XbeeSend(cmd);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
+		if(Robot.COMTYPE == Robot.XBEECOM) {
+			try {
+				XbeeSend a = new XbeeSend(cmd);
+				
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 	    
-		 try {
-			XbeeReceiveInfos b = new XbeeReceiveInfos ();
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}	
+			try {
+				XbeeReceiveInfos b = new XbeeReceiveInfos ();
+				State = XbeeReceiveInfos.get_State();
+				
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}	
+		}
+		else
+	    {
+	    	try {
+				HttpSend a = new HttpSend(szcmd);
+					
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+	    	State = Integer.parseInt(HttpSend.get_State());
 
-		 switch (XbeeReceiveInfos.get_State())
-		 {
-		 case STATE_STOP:
+	    }
+		
+		log.debug("State: " + State);		
+		switch (State)
+		{
+		case STATE_STOP:
 			 RobotWindow.labelState.setText("State: Stopped");
 			 RobotWindow.labelState.setForeground(Color.red);
 			 break;
-		 case STATE_GO:
+		case STATE_GO:
 			 RobotWindow.labelState.setText("State: Go");
 			 RobotWindow.labelState.setForeground(Color.green);
 			 break;
-		 default:
+		default:
 			 RobotWindow.labelState.setText("State: Unknown");
-		 }
-		 RobotWindow.labelSpeedMotorRight.setText("Speed Motor Right: " + Integer.toString(XbeeReceiveInfos.get_SpeedMotorRight()));
-		 RobotWindow.labelSpeedMotorLeft.setText("Speed Motor Left: " + Integer.toString(XbeeReceiveInfos.get_SpeedMotorLeft()));
-		 RobotWindow.labelnb_go.setText("nb go: " + Integer.toString(XbeeReceiveInfos.get_nb_go()));
-		 RobotWindow.labelnb_obstacle.setText("nb obstacle: " + Integer.toString(XbeeReceiveInfos.get_nb_obstacle()));
-		 RobotWindow.labeldirection.setText("direction: " + Integer.toString(XbeeReceiveInfos.get_direction()));
-		 RobotWindow.labeldistance.setText("distance: " + Integer.toString(XbeeReceiveInfos.get_distance()));
-
+		}
+		
+		if(Robot.COMTYPE == Robot.XBEECOM) {		
+			RobotWindow.labelSpeedMotorRight.setText("Speed Motor Right: " + Integer.toString(XbeeReceiveInfos.get_SpeedMotorRight()));
+			RobotWindow.labelSpeedMotorLeft.setText("Speed Motor Left: " + Integer.toString(XbeeReceiveInfos.get_SpeedMotorLeft()));
+			RobotWindow.labelnb_go.setText("nb go: " + Integer.toString(XbeeReceiveInfos.get_nb_go()));
+			RobotWindow.labelnb_obstacle.setText("nb obstacle: " + Integer.toString(XbeeReceiveInfos.get_nb_obstacle()));
+			RobotWindow.labeldirection.setText("direction: " + Integer.toString(XbeeReceiveInfos.get_direction()));
+			RobotWindow.labeldistance.setText("distance: " + Integer.toString(XbeeReceiveInfos.get_distance()));
+		}
+		else
+		{
+			RobotWindow.labelSpeedMotorRight.setText("Speed Motor Right: " + HttpSend.get_SpeedMotorRight());
+			RobotWindow.labelSpeedMotorLeft.setText("Speed Motor Left: " + HttpSend.get_SpeedMotorLeft());
+			RobotWindow.labelnb_go.setText("nb go: " + HttpSend.get_nb_go());
+			RobotWindow.labelnb_obstacle.setText("nb obstacle: " + HttpSend.get_nb_obstacle());
+			RobotWindow.labeldirection.setText("direction: " + HttpSend.get_direction());
+			RobotWindow.labeldistance.setText("distance: " + HttpSend.get_distance());			
+	    }
 	
 	} 
 }

@@ -15,7 +15,8 @@ public class ActionTakePicture extends AbstractAction {
 	private final static Logger log = Logger.getLogger(ActionTakePicture.class);
 	
 	private RobotWindow window;
-	private int cmd[] =  {XbeeSend.CMD_PICTURE};
+	private int cmd[] 		= {XbeeSend.CMD_PICTURE};
+	private String szcmd[]	= {HttpSend.CMD_PICTURE};	
 	
 	private String filename;
 	private int pictno = 0;
@@ -30,7 +31,14 @@ public class ActionTakePicture extends AbstractAction {
 		log.debug("Start");
 	    
 	    try {
-	    	XbeeSend a = new XbeeSend(cmd);
+	    	if(Robot.COMTYPE == Robot.XBEECOM)
+	    	{
+	    		XbeeSend a = new XbeeSend(cmd);
+	    	}
+	    	else
+	    	{
+	    		HttpSend a = new HttpSend(szcmd);
+	    	}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

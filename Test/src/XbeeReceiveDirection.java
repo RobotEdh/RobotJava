@@ -48,7 +48,7 @@ public class XbeeReceiveDirection {
 		XBee xbee = new XBee();
 		
 		try {	
-			xbee.open("COM14", 9600);
+			xbee.open(Robot.Xbeecom, 9600);
 	
 			XBeeResponse response = xbee.getResponse(5*1000); // wait 5 seconds
 			log.debug("getResponse");

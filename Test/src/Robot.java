@@ -5,10 +5,19 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 public class Robot {
-      private static Logger log = Logger.getLogger(Robot.class);
+	
+	public static final int XBEECOM = 1;
+	public static final int HTPPCOM = 2;
+	public static int COMTYPE = HTPPCOM;
+	public static String Xbeecom = "COM14";
+	public static String Httphost = "localhost";
+	public static int Httpport = 80;
+	public static String Httppath = "/Robot";
+	
+    private static Logger log = Logger.getLogger(Robot.class);
   
 
-      public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException{
 
             PropertyConfigurator.configure("log4j.properties");
 
