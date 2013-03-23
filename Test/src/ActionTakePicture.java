@@ -16,7 +16,7 @@ public class ActionTakePicture extends AbstractAction {
 	
 	private RobotWindow window;
 	private int cmd[] 		= {XbeeSend.CMD_PICTURE};
-	private String szcmd[]	= {HttpSend.CMD_PICTURE};	
+	private String szcmd[]	= {HttpPicture.CMD_PICTURE};	
 	
 	private String filename;
 	private int pictno = 0;
@@ -30,28 +30,24 @@ public class ActionTakePicture extends AbstractAction {
 	public void actionPerformed(ActionEvent e) { 
 		log.debug("Start");
 	    
+	    pictno++;
+	    filename = "PICT" + pictno + ".jpg";
+	    
 	    try {
 	    	if(Robot.COMTYPE == Robot.XBEECOM)
 	    	{
 	    		XbeeSend a = new XbeeSend(cmd);
+	    		
+				XbeeReceiveFile b = new XbeeReceiveFile(filename);
 	    	}
 	    	else
 	    	{
-	    		HttpSend a = new HttpSend(szcmd);
+	    		HttpPicture a = new HttpPicture(szcmd, filename);
 	    	}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-
-	    pictno++;
-	    filename = "PICT" + pictno + ".jpg";
-	    	
-	    try {
-			XbeeReceiveFile b = new XbeeReceiveFile(filename);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-	    
+    
 	    FramePicture windowPicture = new FramePicture(filename) ;
 	    windowPicture.setVisible(true) ;
 

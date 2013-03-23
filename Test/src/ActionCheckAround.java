@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JTextField;
 
+import org.apache.http.HttpStatus;
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
@@ -54,7 +55,11 @@ public class ActionCheckAround extends AbstractAction {
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
-		    direction_to_go = Integer.parseInt(HttpSend.get_direction_to_go());
+	    	if (HttpSend.get_Status() == HttpStatus.SC_OK) {
+	    		direction_to_go = Integer.parseInt(HttpSend.get_direction_to_go());
+	    	}
+	    	else
+	    		direction_to_go = -1;
 
 	    }
 		

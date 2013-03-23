@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JTextField;
 
+import org.apache.http.HttpStatus;
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
@@ -55,8 +56,10 @@ public class ActionInfos extends AbstractAction {
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
-	    	State = Integer.parseInt(HttpSend.get_State());
-
+	    	if (HttpSend.get_Status() == HttpStatus.SC_OK)
+	    		State = Integer.parseInt(HttpSend.get_State());
+	    	else
+	    		State = -1;
 	    }
 		
 		log.debug("State: " + State);		
@@ -73,24 +76,24 @@ public class ActionInfos extends AbstractAction {
 		default:
 			 RobotWindow.labelState.setText("State: Unknown");
 		}
-		
-		if(Robot.COMTYPE == Robot.XBEECOM) {		
-			RobotWindow.labelSpeedMotorRight.setText("Speed Motor Right: " + Integer.toString(XbeeReceiveInfos.get_SpeedMotorRight()));
-			RobotWindow.labelSpeedMotorLeft.setText("Speed Motor Left: " + Integer.toString(XbeeReceiveInfos.get_SpeedMotorLeft()));
-			RobotWindow.labelnb_go.setText("nb go: " + Integer.toString(XbeeReceiveInfos.get_nb_go()));
-			RobotWindow.labelnb_obstacle.setText("nb obstacle: " + Integer.toString(XbeeReceiveInfos.get_nb_obstacle()));
-			RobotWindow.labeldirection.setText("direction: " + Integer.toString(XbeeReceiveInfos.get_direction()));
-			RobotWindow.labeldistance.setText("distance: " + Integer.toString(XbeeReceiveInfos.get_distance()));
-		}
-		else
-		{
-			RobotWindow.labelSpeedMotorRight.setText("Speed Motor Right: " + HttpSend.get_SpeedMotorRight());
-			RobotWindow.labelSpeedMotorLeft.setText("Speed Motor Left: " + HttpSend.get_SpeedMotorLeft());
-			RobotWindow.labelnb_go.setText("nb go: " + HttpSend.get_nb_go());
-			RobotWindow.labelnb_obstacle.setText("nb obstacle: " + HttpSend.get_nb_obstacle());
-			RobotWindow.labeldirection.setText("direction: " + HttpSend.get_direction());
-			RobotWindow.labeldistance.setText("distance: " + HttpSend.get_distance());			
-	    }
-	
+		if (HttpSend.get_Status() == 200) {
+			if(Robot.COMTYPE == Robot.XBEECOM) {		
+				RobotWindow.labelSpeedMotorRight.setText("Speed Motor Right: " + Integer.toString(XbeeReceiveInfos.get_SpeedMotorRight()));
+				RobotWindow.labelSpeedMotorLeft.setText("Speed Motor Left: " + Integer.toString(XbeeReceiveInfos.get_SpeedMotorLeft()));
+				RobotWindow.labelnb_go.setText("nb go: " + Integer.toString(XbeeReceiveInfos.get_nb_go()));
+				RobotWindow.labelnb_obstacle.setText("nb obstacle: " + Integer.toString(XbeeReceiveInfos.get_nb_obstacle()));
+				RobotWindow.labeldirection.setText("direction: " + Integer.toString(XbeeReceiveInfos.get_direction()));
+				RobotWindow.labeldistance.setText("distance: " + Integer.toString(XbeeReceiveInfos.get_distance()));
+			}
+			else
+			{
+				RobotWindow.labelSpeedMotorRight.setText("Speed Motor Right: " + HttpSend.get_SpeedMotorRight());
+				RobotWindow.labelSpeedMotorLeft.setText("Speed Motor Left: " + HttpSend.get_SpeedMotorLeft());
+				RobotWindow.labelnb_go.setText("nb go: " + HttpSend.get_nb_go());
+				RobotWindow.labelnb_obstacle.setText("nb obstacle: " + HttpSend.get_nb_obstacle());
+				RobotWindow.labeldirection.setText("direction: " + HttpSend.get_direction());
+				RobotWindow.labeldistance.setText("distance: " + HttpSend.get_distance());			
+		    }
+		  }
 	} 
 }
