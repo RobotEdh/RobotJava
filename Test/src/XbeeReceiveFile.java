@@ -73,7 +73,6 @@ public class XbeeReceiveFile {
 		 					
 		 					for (int i = 1; i < ((RxResponse64) response).getData().length; i++) // start at 1 to ignore first byte
 		 					{
-		 							//log.info("::" + ((RxResponse64) response).getData()[i]);
 		 							out.write(((RxResponse64) response).getData()[i]);				
 		 					}
 		 			}

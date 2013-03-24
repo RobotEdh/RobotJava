@@ -38,7 +38,6 @@ public class XbeeReceiveInfos {
 
 	private final static Logger log = Logger.getLogger(XbeeReceiveInfos.class);
 	
-	public static final int RESP_INFOS = 0x01;
 	private static int State;
 	private static int SpeedMotorRight;
 	private static int SpeedMotorLeft;
@@ -52,7 +51,6 @@ public class XbeeReceiveInfos {
 			) throws Exception {
 	    log.debug("Start");
 
-		int resp = 0;
 		XBee xbee = new XBee();
 		
 		try {	
@@ -68,38 +66,29 @@ public class XbeeReceiveInfos {
  			} else {
  						log.debug("Received RX 64 packet " + ((RxResponse64)response));
  						
- 						// byte 0: response code, must be = RESP_INFOS
- 						resp = ((RxResponse64) response).getData()[0];
- 						log.debug("resp: " + resp);
- 						if(resp != RESP_INFOS)
- 						{
- 							log.info("bad resp: " + resp);
- 						}
- 						else
- 						{	
- 							// byte 1: State
- 							log.info("State:" + ((RxResponse64) response).getData()[1]);
- 							State = ((RxResponse64) response).getData()[1];
- 							// byte 2: SpeedMotorRight
- 							log.info("SpeedMotorRight:" + ((RxResponse64) response).getData()[2]);
- 							SpeedMotorRight = ((RxResponse64) response).getData()[2];
- 							// byte 3: SpeedMotorLeft
- 							log.info("SpeedMotorLeft:" + ((RxResponse64) response).getData()[3]);
- 							SpeedMotorLeft = ((RxResponse64) response).getData()[3];							
- 							// byte 4: nb_go
- 							log.info("nb_go:" + ((RxResponse64) response).getData()[4]);
- 							nb_go = ((RxResponse64) response).getData()[4];	
- 							// byte 5: nb_obstacle
- 							log.info("nb_obstacle:" + ((RxResponse64) response).getData()[5]);
- 							nb_obstacle = ((RxResponse64) response).getData()[5];	
- 							// byte 6: Direction
- 							log.info("Direction:" + ((RxResponse64) response).getData()[6]);
- 							direction = ((RxResponse64) response).getData()[6];
- 							log.debug("Direction2:"  + direction);
- 							// byte 7: Distance
- 							log.info("Distance:" + ((RxResponse64) response).getData()[7]);
- 							distance = ((RxResponse64) response).getData()[7];
- 						}
+ 						// byte 0: State
+ 						log.info("State:" + ((RxResponse64) response).getData()[0]);
+ 						State = ((RxResponse64) response).getData()[0];
+ 						// byte 1: SpeedMotorRight
+ 						log.info("SpeedMotorRight:" + ((RxResponse64) response).getData()[1]);
+ 						SpeedMotorRight = ((RxResponse64) response).getData()[1];
+ 						// byte 2: SpeedMotorLeft
+ 						log.info("SpeedMotorLeft:" + ((RxResponse64) response).getData()[2]);
+ 						SpeedMotorLeft = ((RxResponse64) response).getData()[2];							
+ 						// byte 3: nb_go
+ 						log.info("nb_go:" + ((RxResponse64) response).getData()[3]);
+ 						nb_go = ((RxResponse64) response).getData()[3];	
+ 						// byte 4: nb_obstacle
+ 						log.info("nb_obstacle:" + ((RxResponse64) response).getData()[4]);
+ 						nb_obstacle = ((RxResponse64) response).getData()[4];	
+ 						// byte 5: Direction
+ 						log.info("Direction:" + ((RxResponse64) response).getData()[5]);
+ 						direction = ((RxResponse64) response).getData()[5];
+ 						log.debug("Direction2:"  + direction);
+ 						// byte 6: Distance
+ 						log.info("Distance:" + ((RxResponse64) response).getData()[6]);
+ 						distance = ((RxResponse64) response).getData()[6];
+ 						
 		    }
 		}
 		catch (Exception e) {

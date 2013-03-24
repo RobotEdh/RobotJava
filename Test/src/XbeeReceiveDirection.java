@@ -38,13 +38,11 @@ public class XbeeReceiveDirection {
 
 	private final static Logger log = Logger.getLogger(XbeeReceiveDirection.class);
 	
-	public static final int RESP_CHECK_AROUND = 0x02;
 	private static int direction_to_go;	
 
 	public XbeeReceiveDirection() throws Exception {
 	    log.debug("Start");
 
-		int resp = 0;
 		XBee xbee = new XBee();
 		
 		try {	
@@ -59,20 +57,9 @@ public class XbeeReceiveDirection {
 					log.error("response contains errors", ((ErrorResponse)response).getException());				
  			} else {
  						log.debug("Received RX 64 packet " + ((RxResponse64)response));
- 						
- 						// byte 0: response code, must be = RESP_INFOS
- 						resp = ((RxResponse64) response).getData()[0];
- 						log.debug("resp: " + resp);
- 						if(resp != RESP_CHECK_AROUND)
- 						{
- 							log.info("bad resp: " + resp);
- 						}
- 						else
- 						{	
- 							// byte 1: direction_to_go
- 							log.info("direction_to_go:" + ((RxResponse64) response).getData()[1]);
- 							direction_to_go = ((RxResponse64) response).getData()[1];					
- 						}
+						// byte 0: direction_to_go
+						log.info("direction_to_go:" + ((RxResponse64) response).getData()[0]);
+						direction_to_go = ((RxResponse64) response).getData()[0];					
 		    }
 		}
 		catch (Exception e) {
