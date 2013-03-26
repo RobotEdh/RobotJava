@@ -38,6 +38,7 @@ public class RobotWindow extends JFrame{
 	
 	public static JLabel labelCOMTYPE;
 	public static JLabel labelHttpStatus;
+	public static JLabel labelLogfilename;
 	
 	public static JTextField textMotorNum;
 	public static JTextField textIP;
@@ -273,7 +274,14 @@ public class RobotWindow extends JFrame{
 		labelHttpStatus.setHorizontalAlignment(JLabel.LEFT); 
 		
 		panel4.add(labelHttpStatus);
+		
+		labelLogfilename = new JLabel("Log: "+ Robot.logfilename);
+		labelLogfilename.setForeground(Color.blue);
+		labelLogfilename.setOpaque(true);
+		labelLogfilename.setFont(font);
+		labelLogfilename.setHorizontalAlignment(JLabel.LEFT);
 	
+		panel4.add(labelLogfilename);
 		return panel4;
 	}
 }	
