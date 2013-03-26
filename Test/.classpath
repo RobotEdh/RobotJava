@@ -3,7 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/xbee-api"/>
-	<classpathentry kind="lib" path="/xbee-api/lib/log4j.jar"/>
 	<classpathentry kind="lib" path="/xbee-api/lib/RXTXcomm.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="xbee-api"/>
@@ -12,5 +11,6 @@
 	<classpathentry kind="lib" path="D:/eclipse/http/httpcomponents-client-4.2.3/lib/httpclient-4.2.3.jar"/>
 	<classpathentry kind="lib" path="D:/eclipse/http/httpcomponents-client-4.2.3/lib/httpcore-4.2.2.jar"/>
 	<classpathentry kind="lib" path="D:/eclipse/http/httpcomponents-client-4.2.3/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="log4j.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -36,7 +36,12 @@ public class RobotWindow extends JFrame{
 	public static JLabel labeldirection;
 	public static JLabel labeldistance;
 	
+	public static JLabel labelCOMTYPE;
+	public static JLabel labelHttpStatus;
+	
 	public static JTextField textMotorNum;
+	public static JTextField textIP;
+	public static JTextField textPort;
 	
 
 	public RobotWindow(){
@@ -225,9 +230,49 @@ public class RobotWindow extends JFrame{
 	
 	private JPanel buildContentPanel4(){
 		JPanel panel4 = new JPanel();
-		panel4.setLayout(new FlowLayout(FlowLayout.LEFT));
+		panel4.setLayout(new FlowLayout());
+		       
+		TitledBorder title = BorderFactory.createTitledBorder(
+				BorderFactory.createLineBorder(Color.black), "Configuration");
+        title.setTitleJustification(TitledBorder.CENTER);
+        panel4.setBorder(title);
 		
-		Font font = new Font("Arial", Font.BOLD, 12);
+        Font font = new Font("Arial", Font.BOLD, 12);
+
+        labelCOMTYPE = new JLabel("Communication: "+ (Robot.COMTYPE == Robot.XBEECOM?"XBee":"WIFI"));
+		labelCOMTYPE.setForeground(Color.blue);
+		labelCOMTYPE.setOpaque(true);
+		labelCOMTYPE.setFont(font);
+		labelCOMTYPE.setHorizontalAlignment(JLabel.LEFT); 
+		
+		panel4.add(labelCOMTYPE);
+		
+		textIP = new JTextField("192.168.0.15");
+		textIP.setHorizontalAlignment(JTextField.LEFT);
+		textIP.setForeground(Color.BLACK);
+		textIP.setOpaque(true);
+		textIP.setBackground(Color.WHITE);
+		textIP.setFont(font);
+		textIP.setBorder(null);
+		
+		textPort = new JTextField("44300");
+		textPort.setHorizontalAlignment(JTextField.LEFT);
+		textPort.setForeground(Color.BLACK);
+		textPort.setOpaque(true);
+		textPort.setBackground(Color.WHITE);
+		textPort.setFont(font);
+		textPort.setBorder(null);
+
+		panel4.add(textIP);
+		panel4.add(textPort);
+		
+		labelHttpStatus = new JLabel("HttpStatus: ?");
+		labelHttpStatus.setForeground(Color.blue);
+		labelHttpStatus.setOpaque(true);
+		labelHttpStatus.setFont(font);
+		labelHttpStatus.setHorizontalAlignment(JLabel.LEFT); 
+		
+		panel4.add(labelHttpStatus);
 	
 		return panel4;
 	}

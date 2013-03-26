@@ -76,7 +76,7 @@ public class ActionInfos extends AbstractAction {
 		default:
 			 RobotWindow.labelState.setText("State: Unknown");
 		}
-		if (HttpSend.get_Status() == 200) {
+		if (HttpSend.get_Status() == HttpStatus.SC_OK) {
 			if(Robot.COMTYPE == Robot.XBEECOM) {		
 				RobotWindow.labelSpeedMotorRight.setText("Speed Motor Right: " + Integer.toString(XbeeReceiveInfos.get_SpeedMotorRight()));
 				RobotWindow.labelSpeedMotorLeft.setText("Speed Motor Left: " + Integer.toString(XbeeReceiveInfos.get_SpeedMotorLeft()));
