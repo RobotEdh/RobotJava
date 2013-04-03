@@ -12,6 +12,7 @@ public class ActionStart extends AbstractAction {
 	private final static Logger log = Logger.getLogger(ActionStart.class);
 	
 	private RobotWindow window;
+	private String texte;
 	private int cmd[] 		= {XbeeSend.CMD_START, 0};
 	private String szcmd[]	= {HttpSend.CMD_START, ""};
 	
@@ -45,6 +46,10 @@ public class ActionStart extends AbstractAction {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-			
+	    log.debug("End");
+	    ActionInfos infos = new ActionInfos( window,  texte);
+	    infos.actionPerformed(e);
 	} 
+	
+	
 }

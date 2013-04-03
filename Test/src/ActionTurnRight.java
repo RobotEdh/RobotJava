@@ -12,6 +12,7 @@ public class ActionTurnRight extends AbstractAction {
 	private final static Logger log = Logger.getLogger(ActionTurnRight.class);
 	
 	private RobotWindow window;
+	private String texte;
 	private int cmd[] 		= {XbeeSend.CMD_TURN_RIGHT, 0};
 	private String szcmd[]	= {HttpSend.CMD_TURN_RIGHT, ""};
 	
@@ -44,6 +45,8 @@ public class ActionTurnRight extends AbstractAction {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-			
+	    
+		ActionInfos infos = new ActionInfos( window,  texte);
+	    infos.actionPerformed(e);			
 	} 
 }

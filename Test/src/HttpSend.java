@@ -71,8 +71,8 @@ public HttpSend(String szcmd[]) throws Exception {
 	    Status = response.getStatusLine().getStatusCode();
 	    if (Status == HttpStatus.SC_OK)
 	    {
-			RobotWindow.labelState.setText("HttpStatus: OK");
-			RobotWindow.labelState.setForeground(Color.green);
+			RobotWindow.labelHttpStatus.setText("HttpStatus: OK");
+			RobotWindow.labelHttpStatus.setForeground(Color.green);
 	    	int Field = s.indexOf("Field");
 		    int column;
 		    int semicolumn;
