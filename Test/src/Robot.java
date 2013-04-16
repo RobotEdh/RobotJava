@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import javax.swing.SwingUtilities;
 
@@ -21,7 +22,9 @@ public class Robot {
 
     public static void main(String[] args) throws IOException{
 
-            PropertyConfigurator.configure("/log4j.properties");
+    		File log4jfile = new File("log4j.properties");
+    		PropertyConfigurator.configure(log4jfile.getAbsolutePath());
+    	
             RollingFileAppender r =(RollingFileAppender) Logger.getRootLogger().getAppender("main-appender");
             logfilename = r.getFile();
             
