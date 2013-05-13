@@ -41,8 +41,8 @@ public class XbeeReceiveInfos {
 	private static int State;
 	private static int SpeedMotorRight;
 	private static int SpeedMotorLeft;
-	private static int nb_go;
-	private static int nb_obstacle;
+	private static int TickRight;
+	private static int TickLeft;
 	private static int direction;
 	private static int distance;
 
@@ -75,12 +75,12 @@ public class XbeeReceiveInfos {
  						// byte 2: SpeedMotorLeft
  						log.info("SpeedMotorLeft:" + ((RxResponse64) response).getData()[2]);
  						SpeedMotorLeft = ((RxResponse64) response).getData()[2];							
- 						// byte 3: nb_go
- 						log.info("nb_go:" + ((RxResponse64) response).getData()[3]);
- 						nb_go = ((RxResponse64) response).getData()[3];	
- 						// byte 4: nb_obstacle
- 						log.info("nb_obstacle:" + ((RxResponse64) response).getData()[4]);
- 						nb_obstacle = ((RxResponse64) response).getData()[4];	
+ 						// byte 3: TickRight
+ 						log.info("TickRight:" + ((RxResponse64) response).getData()[3]);
+ 						TickRight = ((RxResponse64) response).getData()[3];	
+ 						// byte 4: TickLeft
+ 						log.info("TickLeft:" + ((RxResponse64) response).getData()[4]);
+ 						TickLeft = ((RxResponse64) response).getData()[4];	
  						// byte 5: Direction
  						log.info("Direction:" + ((RxResponse64) response).getData()[5]);
  						direction = ((RxResponse64) response).getData()[5];
@@ -110,11 +110,11 @@ public class XbeeReceiveInfos {
 	public static int get_SpeedMotorLeft(){
 		return SpeedMotorLeft;
 	}
-	public static int get_nb_go(){
-		return nb_go;
+	public static int get_TickRight(){
+		return TickRight;
 	}
-	public static int get_nb_obstacle(){
-		return nb_obstacle;
+	public static int get_TickLeft(){
+		return TickLeft;
 	}
 	public static int get_direction(){
 		return direction;

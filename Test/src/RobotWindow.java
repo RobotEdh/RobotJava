@@ -31,8 +31,8 @@ public class RobotWindow extends JFrame{
 	public static JLabel labelState;
 	public static JLabel labelSpeedMotorRight;
 	public static JLabel labelSpeedMotorLeft;
-	public static JLabel labelnb_go;
-	public static JLabel labelnb_obstacle;
+	public static JLabel labelTickRight;
+	public static JLabel labelTickLeft;
 	public static JLabel labeldirection;
 	public static JLabel labeldistance;
 	
@@ -174,19 +174,19 @@ public class RobotWindow extends JFrame{
 		panel2.add(labelSpeedMotorLeft);
 		
 			
-		labelnb_go = new JLabel("Nb go: ?");
-		labelnb_obstacle = new JLabel("Nb obstacle: ?");
-		labelnb_go.setForeground(Color.blue);
-		labelnb_go.setOpaque(true);
-		labelnb_go.setFont(font);
-		labelnb_go.setHorizontalAlignment(JLabel.LEFT);
-		labelnb_obstacle.setForeground(Color.blue);
-		labelnb_obstacle.setOpaque(true);
-		labelnb_obstacle.setFont(font);
-		labelnb_obstacle.setHorizontalAlignment(JLabel.LEFT);
+		labelTickRight = new JLabel("Nb Ticks Right: ?");
+		labelTickLeft = new JLabel("Nb Ticks Left: ?");
+		labelTickRight.setForeground(Color.blue);
+		labelTickRight.setOpaque(true);
+		labelTickRight.setFont(font);
+		labelTickRight.setHorizontalAlignment(JLabel.LEFT);
+		labelTickLeft.setForeground(Color.blue);
+		labelTickLeft.setOpaque(true);
+		labelTickLeft.setFont(font);
+		labelTickLeft.setHorizontalAlignment(JLabel.LEFT);
 		
-		panel2.add(labelnb_go);
-		panel2.add(labelnb_obstacle);
+		panel2.add(labelTickRight);
+		panel2.add(labelTickLeft);
 		
 		labeldirection  = new JLabel("Direction: ?");
 		labeldistance  = new JLabel("Distance: ?");

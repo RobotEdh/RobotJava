@@ -114,10 +114,10 @@ public static String get_SpeedMotorRight(){
 public static String get_SpeedMotorLeft(){
 	return  szFieldvalue[2];
 }
-public static String get_nb_go(){
+public static String get_TickRight(){
 	return  szFieldvalue[3];
 }
-public static String get_nb_obstacle(){
+public static String get_TickLeft(){
 	return  szFieldvalue[4];
 }
 public static String get_direction(){

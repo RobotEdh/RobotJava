@@ -80,8 +80,8 @@ public class ActionInfos extends AbstractAction {
 			if(Robot.COMTYPE == Robot.XBEECOM) {		
 				RobotWindow.labelSpeedMotorRight.setText("Speed Motor Right: " + Integer.toString(XbeeReceiveInfos.get_SpeedMotorRight()));
 				RobotWindow.labelSpeedMotorLeft.setText("Speed Motor Left: " + Integer.toString(XbeeReceiveInfos.get_SpeedMotorLeft()));
-				RobotWindow.labelnb_go.setText("nb go: " + Integer.toString(XbeeReceiveInfos.get_nb_go()));
-				RobotWindow.labelnb_obstacle.setText("nb obstacle: " + Integer.toString(XbeeReceiveInfos.get_nb_obstacle()));
+				RobotWindow.labelTickRight.setText("nb Ticks Right: " + Integer.toString(XbeeReceiveInfos.get_TickRight()));
+				RobotWindow.labelTickLeft.setText("nb Ticks Left: " + Integer.toString(XbeeReceiveInfos.get_TickLeft()));
 				RobotWindow.labeldirection.setText("direction: " + Integer.toString(XbeeReceiveInfos.get_direction()));
 				RobotWindow.labeldistance.setText("distance: " + Integer.toString(XbeeReceiveInfos.get_distance()));
 			}
@@ -89,8 +89,8 @@ public class ActionInfos extends AbstractAction {
 			{
 				RobotWindow.labelSpeedMotorRight.setText("Speed Motor Right: " + HttpSend.get_SpeedMotorRight());
 				RobotWindow.labelSpeedMotorLeft.setText("Speed Motor Left: " + HttpSend.get_SpeedMotorLeft());
-				RobotWindow.labelnb_go.setText("nb go: " + HttpSend.get_nb_go());
-				RobotWindow.labelnb_obstacle.setText("nb obstacle: " + HttpSend.get_nb_obstacle());
+				RobotWindow.labelTickRight.setText("nb Tick Right: " + HttpSend.get_TickRight());
+				RobotWindow.labelTickLeft.setText("nb Tick Left: " + HttpSend.get_TickLeft());
 				RobotWindow.labeldirection.setText("direction: " + HttpSend.get_direction());
 				RobotWindow.labeldistance.setText("distance: " + HttpSend.get_distance());			
 		    }
