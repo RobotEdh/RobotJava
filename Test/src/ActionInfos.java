@@ -84,6 +84,8 @@ public class ActionInfos extends AbstractAction {
 				RobotWindow.labelTickLeft.setText("nb Ticks Left: " + Integer.toString(XbeeReceiveInfos.get_TickLeft()));
 				RobotWindow.labeldirection.setText("direction: " + Integer.toString(XbeeReceiveInfos.get_direction()));
 				RobotWindow.labeldistance.setText("distance: " + Integer.toString(XbeeReceiveInfos.get_distance()));
+				RobotWindow.labeltemperature.setText("temperature: " + Integer.toString(XbeeReceiveInfos.get_temperature()));
+			
 			}
 			else
 			{
@@ -92,7 +94,8 @@ public class ActionInfos extends AbstractAction {
 				RobotWindow.labelTickRight.setText("nb Tick Right: " + HttpSend.get_TickRight());
 				RobotWindow.labelTickLeft.setText("nb Tick Left: " + HttpSend.get_TickLeft());
 				RobotWindow.labeldirection.setText("direction: " + HttpSend.get_direction());
-				RobotWindow.labeldistance.setText("distance: " + HttpSend.get_distance());			
+				RobotWindow.labeldistance.setText("distance: " + HttpSend.get_distance());
+				RobotWindow.labeltemperature.setText("temperature: " + HttpSend.get_temperature());				
 		    }
 		  }
 	} 

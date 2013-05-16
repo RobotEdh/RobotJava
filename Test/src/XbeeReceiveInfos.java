@@ -45,6 +45,7 @@ public class XbeeReceiveInfos {
 	private static int TickLeft;
 	private static int direction;
 	private static int distance;
+	private static int temperature;
 
 	public XbeeReceiveInfos(
 										
@@ -88,7 +89,9 @@ public class XbeeReceiveInfos {
  						// byte 6: Distance
  						log.info("Distance:" + ((RxResponse64) response).getData()[6]);
  						distance = ((RxResponse64) response).getData()[6];
- 						
+ 					    // byte 7: temperature
+ 						log.info("Temperature:" + ((RxResponse64) response).getData()[7]);
+ 						temperature = ((RxResponse64) response).getData()[7]; 						
 		    }
 		}
 		catch (Exception e) {
@@ -122,6 +125,8 @@ public class XbeeReceiveInfos {
 	public static int get_distance(){
 			return distance;
 	}
-	
+	public static int get_temperature(){
+		return temperature;
+}	
 	
 }

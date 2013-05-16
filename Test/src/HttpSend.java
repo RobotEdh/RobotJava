@@ -126,6 +126,9 @@ public static String get_direction(){
 public static String get_distance(){
 	return  szFieldvalue[6];
 }
+public static String get_temperature(){
+	return  szFieldvalue[7];
+}
 
 public static String get_direction_to_go(){
 	return  szFieldvalue[0];

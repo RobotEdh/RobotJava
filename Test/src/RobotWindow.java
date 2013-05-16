@@ -35,6 +35,7 @@ public class RobotWindow extends JFrame{
 	public static JLabel labelTickLeft;
 	public static JLabel labeldirection;
 	public static JLabel labeldistance;
+	public static JLabel labeltemperature;
 	
 	public static JLabel labelCOMTYPE;
 	public static JLabel labelHttpStatus;
@@ -53,7 +54,7 @@ public class RobotWindow extends JFrame{
 	
 	private void build(){
 		setTitle("Robot"); 
-		setSize(500,700); 
+		setSize(600,700); 
 		setLocationRelativeTo(null); 
 		setResizable(true); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
@@ -190,6 +191,7 @@ public class RobotWindow extends JFrame{
 		
 		labeldirection  = new JLabel("Direction: ?");
 		labeldistance  = new JLabel("Distance: ?");
+		labeltemperature = new JLabel("Temperature: ?");
 		labeldirection.setForeground(Color.blue);
 		labeldirection.setOpaque(true);
 		labeldirection.setFont(font);
@@ -198,10 +200,15 @@ public class RobotWindow extends JFrame{
 		labeldistance.setOpaque(true);
 		labeldistance.setFont(font);
 		labeldistance.setHorizontalAlignment(JLabel.LEFT);
-	
+		labeltemperature.setForeground(Color.blue);
+		labeltemperature.setOpaque(true);
+		labeltemperature.setFont(font);
+		labeltemperature.setHorizontalAlignment(JLabel.LEFT);
+		
 		panel2.add(labeldirection);
 		panel2.add(labeldistance);
-      
+		panel2.add(labeltemperature);
+		
 		return panel2;
 	}
 	
