@@ -41,7 +41,8 @@ public class RobotWindow extends JFrame{
 	public static JLabel labelHttpStatus;
 	public static JLabel labelLogfilename;
 	
-	public static JTextField textMotorNum;
+	public static JTextField textNbTicks;
+	public static JTextField textPID;
 	public static JTextField textIP;
 	public static JTextField textPort;
 	
@@ -54,7 +55,7 @@ public class RobotWindow extends JFrame{
 	
 	private void build(){
 		setTitle("Robot"); 
-		setSize(600,700); 
+		setSize(600,750); 
 		setLocationRelativeTo(null); 
 		setResizable(true); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
@@ -84,7 +85,7 @@ public class RobotWindow extends JFrame{
 		textAlpha.setBackground(Color.WHITE);
 		textAlpha.setFont(font);
 		title = BorderFactory.createTitledBorder(
-				BorderFactory.createLineBorder(Color.black), "0 < Angle to turn < 90");
+			BorderFactory.createLineBorder(Color.black), "0 < Angle to turn < 90 or =180");
         title.setTitleJustification(TitledBorder.CENTER);
         textAlpha.setBorder(title);
 		
@@ -217,22 +218,34 @@ public class RobotWindow extends JFrame{
 		panel3.setLayout(new FlowLayout());
 		       
 		TitledBorder title = BorderFactory.createTitledBorder(
-				BorderFactory.createLineBorder(Color.black), "1 < Motor to run < 4");
+				BorderFactory.createLineBorder(Color.black), "0 < nb ticks < 999999");
         title.setTitleJustification(TitledBorder.CENTER);
         panel3.setBorder(title);
 		
         Font font = new Font("Arial", Font.BOLD, 12);
+        JButton boutonGo = new JButton(new ActionGo(this, "Go"));
+        
+        textNbTicks = new JTextField("000000");
+        textNbTicks.setHorizontalAlignment(JTextField.CENTER);
+        textNbTicks.setForeground(Color.BLACK);
+        textNbTicks.setOpaque(true);
+        textNbTicks.setBackground(Color.WHITE);
+        textNbTicks.setFont(font);
+        textNbTicks.setBorder(null);
+        
+        textPID = new JTextField("0");
+        textPID.setHorizontalAlignment(JTextField.CENTER);
+        textPID.setForeground(Color.BLACK);
+        textPID.setOpaque(true);
+        textPID.setBackground(Color.WHITE);
+        textPID.setFont(font);
+        textPID.setBorder(null);
 
-		textMotorNum = new JTextField("0");
-		textMotorNum.setHorizontalAlignment(JTextField.CENTER);
-		textMotorNum.setForeground(Color.BLACK);
-		textMotorNum.setOpaque(true);
-		textMotorNum.setBackground(Color.WHITE);
-		textMotorNum.setFont(font);
-		textMotorNum.setBorder(null);
+		panel3.add(textNbTicks);
+		panel3.add(textPID);
+        panel3.add(boutonGo);
 
-		panel3.add(textMotorNum);
-				
+		
 		return panel3;
 	}
 	

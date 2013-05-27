@@ -32,7 +32,7 @@ public class ActionTurnLeft extends AbstractAction {
 		} catch (Exception e0) {
 			log.error("Invalid number: "+ RobotWindow.textAlpha.getText());
 		}
-	    if (cmd[1] < 0 || cmd[1] > 90) log.error("angle must be between 0 and 90 : "+ RobotWindow.textAlpha.getText());
+	    if ((cmd[1] < 0 || cmd[1] > 90) && (cmd[1] != 180)) log.error("angle must be between 0 and 90 OR = 180: "+ RobotWindow.textAlpha.getText());
 		
 	    try {
 	    	if(Robot.COMTYPE == Robot.XBEECOM)

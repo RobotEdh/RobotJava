@@ -27,6 +27,7 @@ public class HttpSend {
 	public static final String CMD_TURN_LEFT =     "TURN_LEFT";
 	public static final String CMD_CHECK_AROUND =  "CHECK_AROUND";
 	public static final String CMD_MOVE_TILT_PAN = "MOVE_TILT_PAN";
+	public static final String CMD_GO =             "GO";
 		
     private static String szparam = "";
     private static String[] szFieldnb;

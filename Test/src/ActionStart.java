@@ -14,7 +14,7 @@ public class ActionStart extends AbstractAction {
 	private RobotWindow window;
 	private String texte;
 	private int cmd[] 		= {XbeeSend.CMD_START, 0};
-	private String szcmd[]	= {HttpSend.CMD_START, ""};
+	private String szcmd[]	= {HttpSend.CMD_START, "0"};
 	
 	public ActionStart(RobotWindow window, String texte){
 		super(texte);
@@ -24,16 +24,7 @@ public class ActionStart extends AbstractAction {
 	
 	public void actionPerformed(ActionEvent e) { 
 		log.debug("Start");
-		
-		try {
-			cmd[1] = Integer.parseInt(RobotWindow.textMotorNum.getText());
-			szcmd[1] = Integer.toString(cmd[1]); ;
-
-		} catch (Exception e0) {
-			log.error("Invalid number: "+ RobotWindow.textMotorNum.getText());
-		}
-	    if (cmd[1] < 0 || cmd[1] > 4) log.error("motor number between 0 and 4 : "+ RobotWindow.textMotorNum.getText());
-	    
+		    
 	    try {
 	    	if(Robot.COMTYPE == Robot.XBEECOM)
 	    	{

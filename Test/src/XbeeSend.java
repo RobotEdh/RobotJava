@@ -28,6 +28,7 @@ public class XbeeSend {
 	public static final int CMD_TURN_LEFT =     0x06;
 	public static final int CMD_CHECK_AROUND =  0x07;
 	public static final int CMD_MOVE_TILT_PAN = 0x08;
+	public static final int CMD_GO =            0x09;
 	
 	public XbeeSend(int cmd[]) throws Exception {
 	    log.debug("Start");
