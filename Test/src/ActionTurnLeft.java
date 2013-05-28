@@ -45,8 +45,6 @@ public class ActionTurnLeft extends AbstractAction {
 	    	}
 		} catch (Exception e1) {
 			e1.printStackTrace();
-		}
-	    ActionInfos infos = new ActionInfos( window,  texte);
-	    infos.actionPerformed(e);			
+		}			
 	} 
 }

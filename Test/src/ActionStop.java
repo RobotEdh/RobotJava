@@ -37,8 +37,6 @@ private final static Logger log = Logger.getLogger(ActionStop.class);
 	    	}
 		} catch (Exception e1) {
 			e1.printStackTrace();
-		}
-	    ActionInfos infos = new ActionInfos( window,  texte);
-	    infos.actionPerformed(e);	
+		}	
 	} 
 }

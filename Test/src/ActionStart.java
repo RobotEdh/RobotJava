@@ -38,8 +38,6 @@ public class ActionStart extends AbstractAction {
 			e1.printStackTrace();
 		}
 	    log.debug("End");
-	    ActionInfos infos = new ActionInfos( window,  texte);
-	    infos.actionPerformed(e);
 	} 
 	
 	
