@@ -94,7 +94,13 @@ public class ActionInfos extends AbstractAction {
 				RobotWindow.labelTickRight.setText("nb Tick Right: " + HttpSend.get_TickRight());
 				RobotWindow.labelTickLeft.setText("nb Tick Left: " + HttpSend.get_TickLeft());
 				RobotWindow.labeldirection.setText("direction: " + HttpSend.get_direction());
-				RobotWindow.labeldistance.setText("distance: " + HttpSend.get_distance());
+				if (HttpSend.get_distance() != "65535") {
+				      RobotWindow.labeldistance.setText("distance: " + HttpSend.get_distance());
+				}
+				else
+				{
+					   RobotWindow.labeldistance.setText("distance: ?" );
+				}					
 				RobotWindow.labeltemperature.setText("temperature: " + HttpSend.get_temperature());				
 		    }
 		  }

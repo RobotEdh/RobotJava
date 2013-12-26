@@ -41,7 +41,7 @@ public class RobotWindow extends JFrame{
 	public static JLabel labelHttpStatus;
 	public static JLabel labelLogfilename;
 	
-	public static JTextField textNbTicks;
+	public static JTextField textNbSecs;
 	public static JTextField textPID;
 	public static JTextField textIP;
 	public static JTextField textPort;
@@ -218,20 +218,20 @@ public class RobotWindow extends JFrame{
 		panel3.setLayout(new FlowLayout());
 		       
 		TitledBorder title = BorderFactory.createTitledBorder(
-				BorderFactory.createLineBorder(Color.black), "0 < nb ticks < 999999");
+				BorderFactory.createLineBorder(Color.black), "0 < nb secs < 999999");
         title.setTitleJustification(TitledBorder.CENTER);
         panel3.setBorder(title);
 		
         Font font = new Font("Arial", Font.BOLD, 12);
         JButton boutonGo = new JButton(new ActionGo(this, "Go"));
         
-        textNbTicks = new JTextField("000000");
-        textNbTicks.setHorizontalAlignment(JTextField.CENTER);
-        textNbTicks.setForeground(Color.BLACK);
-        textNbTicks.setOpaque(true);
-        textNbTicks.setBackground(Color.WHITE);
-        textNbTicks.setFont(font);
-        textNbTicks.setBorder(null);
+        textNbSecs = new JTextField("000000");
+        textNbSecs.setHorizontalAlignment(JTextField.CENTER);
+        textNbSecs.setForeground(Color.BLACK);
+        textNbSecs.setOpaque(true);
+        textNbSecs.setBackground(Color.WHITE);
+        textNbSecs.setFont(font);
+        textNbSecs.setBorder(null);
         
         textPID = new JTextField("0");
         textPID.setHorizontalAlignment(JTextField.CENTER);
@@ -241,7 +241,7 @@ public class RobotWindow extends JFrame{
         textPID.setFont(font);
         textPID.setBorder(null);
 
-		panel3.add(textNbTicks);
+		panel3.add(textNbSecs);
 		panel3.add(textPID);
         panel3.add(boutonGo);
 

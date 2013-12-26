@@ -26,15 +26,15 @@ public class ActionGo extends AbstractAction {
 		log.debug("Start");
 		
 		try {
-			cmd[1] = Integer.parseInt(RobotWindow.textNbTicks.getText());
-			cmd[2] =  Integer.parseInt(RobotWindow.textPID.getText());
+			cmd[1] = Integer.parseInt(RobotWindow.textNbSecs.getText());
+			cmd[2] = Integer.parseInt(RobotWindow.textPID.getText());
 			szcmd[1] = Integer.toString(cmd[1]);
 			szcmd[2] = Integer.toString(cmd[2]);
 
 		} catch (Exception e0) {
-			log.error("Invalid number: "+ RobotWindow.textNbTicks.getText() + RobotWindow.textPID.getText());
+			log.error("Invalid number: "+ RobotWindow.textNbSecs.getText() + RobotWindow.textPID.getText());
 		}
-	    if (cmd[1] < 0 || cmd[1] > 999999) log.error("Nb ticks between 0 and 999999 : "+ RobotWindow.textNbTicks.getText());
+	    if (cmd[1] < 0 || cmd[1] > 999999) log.error("Nb secs between 0 and 999999 : "+ RobotWindow.textNbSecs.getText());
 	    if (cmd[2] < 0 || cmd[1] > 1) log.error("PID between 0 and 1 : "+ RobotWindow.textPID.getText());
 	    
 	    try {
